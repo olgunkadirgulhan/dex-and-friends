@@ -1,7 +1,9 @@
 name: videos
 on:
   schedule:
-    # Shorts 4/gün: slotlar 13:00, 16:00, 19:00, 22:00 UTC (TR 16, 19, 22, 01).
+    # Shorts 4/gün: slotlar 13:00, 16:00, 20:00, 22:00 UTC (ET 09, 12, 16, 18 · TR 16, 19, 23, 01).
+    # ET öğleden sonra/akşam 09-22..26 verisinde en iyisiydi; son slot 23:00 UTC'den önce ki
+    # UTC günü (ve günlük sayaç) dönmeden iki deneme şansı olsun. cron-job.org saatlik tetikler.
     # Uzun video Salı/Perşembe/Cumartesi 17:00 UTC (TR 20:00).
     # GitHub cron'u geciktiriyor/düşürüyor: saatlik tetiklenir (yoğun :00 dışında),
     # .github/slot_guard.py sadece zamanı gelmiş ve yüklenmemiş slot varsa video yapar.
@@ -41,7 +43,7 @@ jobs:
       - id: g
         env:
           LOG_FILE: published.csv
-          SLOTS: "13:00,16:00,19:00,22:00"
+          SLOTS: "13:00,16:00,20:00,22:00"
           LONG: "tue 17:00 long,thu 17:00 long,sat 17:00 long"
         run: python3 .github/slot_guard.py
 
