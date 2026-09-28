@@ -127,9 +127,18 @@
       "topic": "school",
       "title": "Mama Rose's Strict 'No Homework' Rule 💀",
       "date": "2026-09-28 13:20"
+    },
+    {
+      "id": "short_20260928-160817",
+      "format": "short",
+      "template": "expectation_reality",
+      "topic": "the gym",
+      "title": "Abs by Friday? The pink weight had other plans 💀",
+      "date": "2026-09-28 16:18"
     }
   ],
   "bank_used": [
-    "bank_001_birthday_cake"
+    "bank_001_birthday_cake",
+    "bank_002_abs_by_friday"
   ]
 }
