@@ -44,7 +44,8 @@ jobs:
         env:
           LOG_FILE: published.csv
           SLOTS: "13:00,16:00,20:00,22:00"
-          LONG: "tue 17:00 long,thu 17:00 long,sat 17:00 long"
+          # uzun videolar medyan 156 izlenme (short 1175): haftada bire indirildi
+          LONG: "sat 17:00 long"
         run: python3 .github/slot_guard.py
 
   make:

@@ -27,7 +27,17 @@ SHORT_TEMPLATES = {
     'types_of_people': 'Types of People: "Types of people at X" -> 3-4 fast scenes, each a type (use scene labels '
                        'like "The Show-Off"), the last one the most absurd.',
     'plot_twist': 'Plot Twist: a normal conversation -> a totally unexpected twist in the last 3 seconds.',
+    'sibling_war': 'Sibling War: Dex and Pip fight over something tiny -> it escalates absurdly -> Mama Rose '
+                   'ends it in the last line.',
+    'pov': 'POV: the hook starts with "POV:" and puts the viewer in a relatable everyday moment; the characters '
+           'react to "you" (the viewer) and it gets worse each line.',
+    'rules_of': 'Unspoken Rules: "Unspoken rules of X" -> 3 quick scenes, each a rule (scene label "Rule #1" ...), '
+                'the last rule breaks the fourth wall.',
 }
+# Medyan izlenmeye göre ağırlık (2026-10-05: types_of_people 1389, plot_twist 1175, mom_logic 1084,
+# expectation_reality 1006, caught 994); yeni şablonlar denensin diye orta ağırlıkta
+TEMPLATE_WEIGHTS = {'types_of_people': 4, 'plot_twist': 3, 'mom_logic': 3, 'expectation_reality': 2, 'caught': 2,
+                    'sibling_war': 3, 'pov': 2, 'rules_of': 2}
 LONG_SERIES = {
     'dexs_terrible_ideas': "Dex's Terrible Ideas: one of Dex's business/life plans turns into a disaster.",
     'growing_up_with_mama_rose': 'Growing Up With Mama Rose: family memories, rules and chaos at home.',
@@ -38,7 +48,13 @@ TOPICS = ['school', 'parents rules', 'sibling fight', 'first job', 'paying rent'
           'the night before an exam', 'the neighbor', 'holiday dinner', 'grocery shopping', 'traffic',
           'a job interview', 'cleaning the room', 'a birthday party', 'online shopping', 'a school trip',
           'learning to drive', 'the wifi goes down', 'a haircut', 'a surprise party', 'babysitting Pip',
-          'a restaurant bill', 'a report card', 'moving to a new house', 'a video game', 'a pet goldfish']
+          'a restaurant bill', 'a report card', 'moving to a new house', 'a video game', 'a pet goldfish',
+          'the last slice of pizza', 'group projects', 'the TV remote', 'a power outage', 'waking up late',
+          'a family road trip', 'the dentist', 'picture day at school', 'a snow day', 'sharing a bedroom',
+          'the school cafeteria', 'a garage sale', 'a science fair', 'a fire drill', 'grandma visiting',
+          'returning something to the store', 'the ice cream truck', 'a broken vase', 'a spelling bee',
+          'chores day', 'the first day of school', 'a lost phone', 'a camping trip', 'a new puppy',
+          'a talent show', 'the self checkout', 'a long flight', 'leftovers in the fridge']
 BANNED = re.compile(r'\b(kill|dead|die|blood|sex|sexy|drunk|beer|wine|drug|damn|hell|stupid idiot|shut up)\b', re.I)
 
 
@@ -147,6 +163,20 @@ def normalize(sc, fmt):
 
 # ------------------------------------------------------------------ üretim
 
+def title_key(t):
+    return re.sub(r'[^a-z0-9]+', ' ', (t or '').lower()).strip()
+
+
+def published_titles():
+    """Kanala yüklenmiş tüm başlıklar (kopya başlık = YouTube'da tekrar eden içerik sinyali)."""
+    p = ROOT / 'published.csv'
+    if not p.exists():
+        return set()
+    import csv
+    with p.open(encoding='utf-8') as f:
+        return {title_key(r.get('title')) for r in csv.DictReader(f)}
+
+
 def load_hist(path):
     return json.loads(path.read_text(encoding='utf-8')) if path.exists() else {'recent': [], 'bank_used': []}
 
@@ -155,12 +185,13 @@ def pick(hist, fmt, rnd):
     recent = [r for r in hist['recent'] if r.get('format', 'short') == fmt]
     if fmt == 'short':
         last = recent[-1]['template'] if recent else None
-        template = rnd.choice([k for k in SHORT_TEMPLATES if k != last])
+        options = [k for k in SHORT_TEMPLATES if k != last]
+        template = rnd.choices(options, weights=[TEMPLATE_WEIGHTS.get(k, 1) for k in options])[0]
     else:
         done = [r['template'] for r in recent]
         order = list(LONG_SERIES)
         template = order[len(done) % len(order)]
-    used = {r.get('topic') for r in hist['recent'][-12:]}
+    used = {r.get('topic') for r in hist['recent'][-30:]}
     topic = rnd.choice([t for t in TOPICS if t not in used] or TOPICS)
     return template, topic
 
@@ -171,7 +202,7 @@ def schema_text():
 
 def write_with_gemini(fmt, template, topic, hist):
     base = (PROMPTS / ('script_short.txt' if fmt == 'short' else 'script_long.txt')).read_text(encoding='utf-8')
-    recent_titles = '\n'.join('- ' + r.get('title', '') for r in hist['recent'][-15:])
+    recent_titles = '\n'.join('- ' + r.get('title', '') for r in hist['recent'][-30:])
     prompt = base.format(
         character_bible=bible(),
         template=(SHORT_TEMPLATES if fmt == 'short' else LONG_SERIES)[template],
@@ -200,6 +231,8 @@ def write_with_gemini(fmt, template, topic, hist):
         except Exception as e:
             log(f'write attempt {attempt + 1} failed: {str(e)[:200]}'); continue
         problems = normalize(sc, fmt)
+        if title_key(sc.get('title')) in published_titles():
+            problems.append(f"title already used on the channel: {sc.get('title')}")
         if problems:
             log(f'attempt {attempt + 1} rejected: {problems[:3]}')
             feedback = '\n\nYour previous script was rejected for: ' + '; '.join(problems[:5]) + '. Fix these.'
