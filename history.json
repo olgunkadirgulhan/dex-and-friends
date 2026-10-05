@@ -335,10 +335,19 @@
       "topic": "traffic",
       "title": "His fake traffic excuse went horribly wrong 😭",
       "date": "2026-10-03 22:10"
+    },
+    {
+      "id": "short_20261005-070951",
+      "format": "short",
+      "template": "mom_logic",
+      "topic": "parents rules",
+      "title": "Mom logic will never make sense 😂",
+      "date": "2026-10-05 07:10"
     }
   ],
   "bank_used": [
     "bank_001_birthday_cake",
-    "bank_002_abs_by_friday"
+    "bank_002_abs_by_friday",
+    "bank_003_fridge_door"
   ]
 }
