@@ -13,6 +13,8 @@ RULES
 - Include at least one physical gag via "action" (and/or a "sfx").
 - End with a twist or a hard punchline. The last line should be the funniest.
 - 1-3 scenes. Use 2 characters per scene (max 3). A new scene may have a "card" like "5 minutes later..." or a "label".
+- Audience: teens and adults (13+), NOT young children. Humor comes from grown-up/teen life (work, money, roommates,
+  dating awkwardness, adulting, family as seen by a teen/adult). Avoid elementary-school settings and kid-show tone.
 - Family-friendly: no swearing, no romance beyond crushes, no violence beyond cartoon slipper/slap gags,
   no real people, brands, celebrities, politics or religion.
 - "hook" = on-screen top caption, max 8 words, like "When mom finds the empty cake box".

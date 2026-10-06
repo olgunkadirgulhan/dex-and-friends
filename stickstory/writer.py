@@ -43,18 +43,18 @@ LONG_SERIES = {
     'growing_up_with_mama_rose': 'Growing Up With Mama Rose: family memories, rules and chaos at home.',
     'big_tonys_business_lessons': "Big Tony's Business Lessons: Big Tony 'teaches' business and it backfires.",
 }
-TOPICS = ['school', 'parents rules', 'sibling fight', 'first job', 'paying rent', 'going to the doctor', 'diet',
+TOPICS = ['college', 'parents rules', 'sibling fight', 'first job', 'paying rent', 'going to the doctor', 'diet',
           'the gym', 'meeting the girlfriend\'s parents', 'a wedding', 'vacation', 'phone addiction',
           'the night before an exam', 'the neighbor', 'holiday dinner', 'grocery shopping', 'traffic',
-          'a job interview', 'cleaning the room', 'a birthday party', 'online shopping', 'a school trip',
+          'a job interview', 'cleaning the room', 'a birthday party', 'online shopping', 'a work trip',
           'learning to drive', 'the wifi goes down', 'a haircut', 'a surprise party', 'babysitting Pip',
-          'a restaurant bill', 'a report card', 'moving to a new house', 'a video game', 'a pet goldfish',
+          'a restaurant bill', 'a performance review', 'moving to a new house', 'a video game', 'a pet goldfish',
           'the last slice of pizza', 'group projects', 'the TV remote', 'a power outage', 'waking up late',
-          'a family road trip', 'the dentist', 'picture day at school', 'a snow day', 'sharing a bedroom',
-          'the school cafeteria', 'a garage sale', 'a science fair', 'a fire drill', 'grandma visiting',
-          'returning something to the store', 'the ice cream truck', 'a broken vase', 'a spelling bee',
-          'chores day', 'the first day of school', 'a lost phone', 'a camping trip', 'a new puppy',
-          'a talent show', 'the self checkout', 'a long flight', 'leftovers in the fridge']
+          'a family road trip', 'the dentist', 'passport photo day', 'working from home', 'sharing a bedroom',
+          'the office kitchen', 'a garage sale', 'a team-building day', 'a fire drill', 'grandma visiting',
+          'returning something to the store', 'the food truck', 'a broken vase', 'a trivia night',
+          'chores day', 'the first day at a new job', 'a lost phone', 'a camping trip', 'a new puppy',
+          'a karaoke night', 'the self checkout', 'a long flight', 'leftovers in the fridge']
 BANNED = re.compile(r'\b(kill|dead|die|blood|sex|sexy|drunk|beer|wine|drug|damn|hell|stupid idiot|shut up)\b', re.I)
 
 
@@ -225,7 +225,7 @@ def write_with_gemini(fmt, template, topic, hist):
                    'topics:\n\n' + '\n\n---\n\n'.join(shots))
     judge_tpl = (PROMPTS / 'judge.txt').read_text(encoding='utf-8')
     best, best_score, feedback = None, -1, ''
-    for attempt in range(4):
+    for attempt in range(7):   # 7/10 kalite çıtasını yakalamak için daha çok deneme
         try:
             sc = parse_json(gemini(prompt + feedback))
         except Exception as e:
@@ -241,7 +241,7 @@ def write_with_gemini(fmt, template, topic, hist):
             j = parse_json(gemini(judge_tpl + '\n\nSCRIPT:\n' + json.dumps(sc, ensure_ascii=False), temperature=0.2))
             score = float(j.get('score', 0))
         except Exception as e:
-            log(f'judge failed ({str(e)[:120]}), accepting script'); score, j = 7.0, {}
+            log(f'judge failed ({str(e)[:120]})'); score, j = 6.0, {}
         log(f'attempt {attempt + 1}: score {score} | {sc.get("title")}')
         if score > best_score:
             best, best_score = sc, score
@@ -275,9 +275,10 @@ def make_script(fmt, hist, seed=None):
         try:
             sc = write_with_gemini(fmt, template, topic, hist)
             sc.update(id=f'{fmt}_{stamp}', template=template, topic=topic, source='gemini')
-            if sc.get('judge_score', 0) >= 5 or fmt != 'short' or from_bank(fmt, hist) is None:
+            # kalite çıtası: 6'nın altı yüklenmez (bank varsa onu kullan) — düşük kalite seri üretim sinyali verir
+            if sc.get('judge_score', 0) >= 6 or fmt != 'short' or from_bank(fmt, hist) is None:
                 return sc
-            log(f"best Gemini score {sc['judge_score']} < 5, using a bank script instead")
+            log(f"best Gemini score {sc['judge_score']} < 6, using a bank script instead")
         except Exception as e:
             log(f'Gemini failed, falling back to bank: {str(e)[:200]}')
     sc = from_bank(fmt, hist)

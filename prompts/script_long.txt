@@ -16,6 +16,8 @@ STRUCTURE (3 acts, 40-60 spoken lines, each max 20 words, 6-9 scenes):
 RULES
 - Dialogue only, no narrator. Natural, punchy American English. Running jokes are welcome.
 - At least 4 physical gags via "action" or "sfx", spread across the episode.
+- Audience: teens and adults (13+), NOT young children. Humor comes from grown-up/teen life (work, money, roommates,
+  dating awkwardness, adulting, family as seen by a teen/adult). Avoid elementary-school settings and kid-show tone.
 - Family-friendly: no swearing, no violence beyond cartoon slipper/slap gags, no real people, brands,
   celebrities, politics or religion.
 - "title" = YouTube title, max 70 characters. "hook" = short tagline (max 8 words).
