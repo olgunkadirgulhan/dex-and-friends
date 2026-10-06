@@ -7,7 +7,7 @@ senaryo (Gemini yazar + Gemini hakem ≥7, yoksa bank/) → Kokoro TTS (karakter
 → cairo vektör animasyon (rig, 15 sahne, kamera, lip-sync, altyazı, efekt) → prosedürel müzik/SFX → ffmpeg → YouTube
 ```
 
-Takvim: Shorts TR 16:00 / 21:00 / 02:00, uzun video Salı/Perşembe/Cumartesi 20:00.
+Takvim: Shorts TR 16:00 / 20:00 / 01:00 (günde 3), uzun video Cumartesi 20:00.
 
 ## Kurulum (bir kez)
 1. Repo secrets: `GEMINI_API_KEY` (diğer kanallarındaki anahtarla aynı olabilir)
