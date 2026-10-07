@@ -399,11 +399,20 @@
       "topic": "holiday dinner",
       "title": "Types of holiday dinner guests are getting wild 💀",
       "date": "2026-10-07 13:21"
+    },
+    {
+      "id": "short_20261007-170839",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "a wedding",
+      "title": "Every wedding has THIS guy 😭",
+      "date": "2026-10-07 17:16"
     }
   ],
   "bank_used": [
     "bank_001_birthday_cake",
     "bank_002_abs_by_friday",
-    "bank_003_fridge_door"
+    "bank_003_fridge_door",
+    "bank_004_wedding_types"
   ]
 }
