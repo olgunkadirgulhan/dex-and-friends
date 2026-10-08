@@ -19,6 +19,7 @@ SECRET = Path(__file__).resolve().parent / 'client_secret.json'
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--prefix', default='YT_', help='secret adı ön eki (ör. YT_EN_)')
     ap.add_argument('--repo', help='GitHub repo (owner/name): secrets gh CLI ile yazılır')
     ap.add_argument('--expect', default='', help='beklenen kanal adı (parçası), boşsa kontrol yok')
     a = ap.parse_args()
@@ -43,8 +44,8 @@ def main():
     print(f'\nKanal: {title} ({cid})')
     if a.expect and a.expect.lower() not in title.lower():
         sys.exit(f"Bu '{a.expect}' değil. Tekrar çalıştır ve doğru kanalı seç. Hiçbir şey kaydedilmedi.")
-    values = {'YT_CLIENT_ID': creds.client_id, 'YT_CLIENT_SECRET': creds.client_secret,
-              'YT_REFRESH_TOKEN': creds.refresh_token, 'YT_CHANNEL_ID': cid}
+    values = {f'{a.prefix}CLIENT_ID': creds.client_id, f'{a.prefix}CLIENT_SECRET': creds.client_secret,
+              f'{a.prefix}REFRESH_TOKEN': creds.refresh_token, f'{a.prefix}CHANNEL_ID': cid}
     if a.repo:
         for k, v in values.items():
             subprocess.run(['gh', 'secret', 'set', k, '--repo', a.repo], input=v, text=True, check=True)

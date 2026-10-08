@@ -181,6 +181,20 @@ def load_hist(path):
     return json.loads(path.read_text(encoding='utf-8')) if path.exists() else {'recent': [], 'bank_used': []}
 
 
+
+def viewer_request(path, rnd, chance=0.5):
+    """Yorumlardan gelen izleyici isteği (tools/auto_reply.py yazar): varsa yarı olasılıkla sıradaki konu olur."""
+    if not path.exists() or rnd.random() > chance:
+        return None
+    reqs = json.loads(path.read_text(encoding='utf-8'))
+    for r in reqs:
+        if not r.get('used'):
+            r['used'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+            path.write_text(json.dumps(reqs, indent=1, ensure_ascii=False) + '\n', encoding='utf-8')
+            print(f"[writer] izleyici isteği konu oldu: {r['topic']}", flush=True)
+            return r['topic']
+    return None
+
 def pick(hist, fmt, rnd):
     recent = [r for r in hist['recent'] if r.get('format', 'short') == fmt]
     if fmt == 'short':
@@ -193,6 +207,8 @@ def pick(hist, fmt, rnd):
         template = order[len(done) % len(order)]
     used = {r.get('topic') for r in hist['recent'][-30:]}
     topic = rnd.choice([t for t in TOPICS if t not in used] or TOPICS)
+    if fmt == 'short':
+        topic = viewer_request(Path(__file__).resolve().parent.parent / 'viewer_requests.json', rnd) or topic
     return template, topic
 
 

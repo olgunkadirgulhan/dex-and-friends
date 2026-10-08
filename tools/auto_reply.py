@@ -3,6 +3,9 @@
 Ayrıca: son 48 saatte yayınlanan ve kanalın henüz yorum yazmadığı her videoya, o videoya özel bir soru ile
 "ilk yorum" (FIRST_COMMENT=1, CHANNEL_LANG=en|tr|de). "Like/subscribe" ve link yok.
 
+İzleyici istekleri ("make a video about X") viewer_requests.json'a yazılır (REQUESTS_FILE); senaryo yazan kanallar
+sıradaki konu olarak kullanır.
+
 Kurallar (YouTube spam politikasına takılmamak için):
   - Her cevap yoruma özel ve yorumun dilinde (Gemini yazar; yoksa çeşitli hazır kalıplar), kısa, 1-2 emoji
   - Link / reklam / hakaret / çok uzun yorumlara cevap yok; kanalın kendi yorumlarına ve zaten cevaplananlara yok
@@ -26,6 +29,9 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
 STATE = Path(os.environ.get('STATE_FILE', 'comment_replies.json'))
+REQUESTS = Path(os.environ.get('REQUESTS_FILE', 'viewer_requests.json'))
+ASKS = re.compile(r'(make|do (a|one)|next|can you|could you|please|video (about|on)|part 2|more of|'
+                  r'yap(ın|sanıza|ar mısınız|abilir misiniz)|bir de|lütfen|sonraki|devamı|istiyoruz|anlatır mısınız)', re.I)
 MAX = int(os.environ.get('MAX_PER_RUN', '10'))
 KIND = os.environ.get('CHANNEL_KIND', 'general')
 NAME = os.environ.get('CHANNEL_NAME', 'our channel')
@@ -175,6 +181,37 @@ def first_question(title: str, desc: str, state: dict | None = None) -> str:
     return pick_question(pool, title, state if state is not None else {})
 
 
+def extract_request(comment: str) -> str | None:
+    """Yorum bir video isteği içeriyorsa kısa konu (en fazla 6 kelime), yoksa None. Önce ucuz kelime süzgeci."""
+    if not ASKS.search(comment) or not os.environ.get('GEMINI_API_KEY'):
+        return None
+    prompt = (f'A viewer of the YouTube channel "{NAME}" ({ABOUT}) wrote this comment. If it asks for a new video '
+              f'topic or idea, answer with that topic in at most 6 words, in the channel language. Otherwise answer '
+              f'NONE. Output only the topic or NONE.\n\nComment: """{comment[:400]}"""')
+    for model in ('gemini-flash-latest', 'gemini-flash-lite-latest'):
+        try:
+            r = requests.post(f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
+                              json={'contents': [{'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0}},
+                              headers={'x-goog-api-key': os.environ['GEMINI_API_KEY']}, timeout=30)
+            if r.status_code == 200:
+                parts = r.json()['candidates'][0]['content']['parts']
+                t = ''.join(p.get('text', '') for p in parts if not p.get('thought')).strip().strip('".')
+                return None if not t or t.upper().startswith('NONE') or len(t) > 60 else t
+        except Exception:  # noqa: BLE001
+            continue
+    return None
+
+
+def save_request(topic: str, comment: str, video: str):
+    reqs = json.loads(REQUESTS.read_text(encoding='utf-8')) if REQUESTS.exists() else []
+    if any(r['topic'].lower() == topic.lower() for r in reqs):
+        return
+    reqs.append({'topic': topic, 'comment': comment[:200], 'video': video,
+                 'date': datetime.now(timezone.utc).strftime('%Y-%m-%d'), 'used': None})
+    REQUESTS.write_text(json.dumps(reqs[-200:], indent=1, ensure_ascii=False) + '\n', encoding='utf-8')
+    print(f'💡 izleyici isteği: {topic}')
+
+
 def first_comments(yt, cid, state):
     """Son 48 saatte yüklenen ve kanalın henüz yorum yazmadığı her videoya, videoya özel bir soru."""
     uploads = yt.channels().list(part='contentDetails', id=cid).execute()['items'][0]['contentDetails'][
@@ -240,6 +277,9 @@ def main():
         text = sn.get('textDisplay') or sn.get('textOriginal') or ''
         if not text.strip() or len(text) > 600 or SKIP.search(text) or RUDE.search(text):
             done.add(top['id']); continue
+        req = extract_request(text)
+        if req:
+            save_request(req, text, sn.get('videoId', ''))
         reply = gemini(text) or random.choice(TEMPLATES[lang(text)])
         yt.comments().insert(part='snippet', body={'snippet': {'parentId': top['id'], 'textOriginal': reply}}).execute()
         done.add(top['id']); sent += 1

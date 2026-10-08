@@ -101,7 +101,7 @@ jobs:
         run: |
           git config user.name "stickstory-bot"
           git config user.email "bot@users.noreply.github.com"
-          for p in history.json published.csv queue; do [ -e "$p" ] && git add "$p" || true; done
+          for p in history.json published.csv queue viewer_requests.json; do [ -e "$p" ] && git add "$p" || true; done
           git diff --cached --quiet && exit 0
           git commit -m "video: $(date -u +%F-%H%M)"
           git pull --rebase

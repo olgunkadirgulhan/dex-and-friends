@@ -1,5 +1,5 @@
 name: comments
-# Yeni videolara ilk yorum + yorumlara kişisel cevap (tools/auto_reply.py), saatte bir
+# Yeni videolara videoya özel ilk yorum + yorumlara kişisel cevap (tools/auto_reply.py), saatte bir
 on:
   schedule:
     - cron: "37 * * * *"
@@ -22,20 +22,24 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -q google-api-python-client google-auth requests
-      - env:
+      - name: Dex & Friends
+        continue-on-error: true
+        env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           CHANNEL_NAME: "Dex & Friends"
           CHANNEL_ABOUT: "Funny animated stick-figure comedy Shorts about family, school and everyday life."
           CHANNEL_KIND: general
           CHANNEL_LANG: en
+          STATE_FILE: comment_replies.json
+          REQUESTS_FILE: viewer_requests.json
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python tools/auto_reply.py
       - run: |
           git config user.name "comment-bot"
           git config user.email "bot@users.noreply.github.com"
-          [ -e comment_replies.json ] && git add comment_replies.json || true
+          git add comment_replies*.json viewer_requests*.json 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m "comments: $(date -u +%F-%H%M)"
           for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done
