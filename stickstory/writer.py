@@ -31,13 +31,17 @@ SHORT_TEMPLATES = {
                    'ends it in the last line.',
     'pov': 'POV: the hook starts with "POV:" and puts the viewer in a relatable everyday moment; the characters '
            'react to "you" (the viewer) and it gets worse each line.',
+    'normal_vs_psycho': 'Normal vs Psycho: the same everyday situation shown twice - scene label "Normal" (Dex does '
+                        'it the sensible way), then scene label "Psycho" (Pip or Big Tony does it in the most unhinged, '
+                        'over-the-top cartoon way, no real violence); the psycho version ends on the funniest line.',
     'rules_of': 'Unspoken Rules: "Unspoken rules of X" -> 3 quick scenes, each a rule (scene label "Rule #1" ...), '
                 'the last rule breaks the fourth wall.',
 }
 # Medyan izlenmeye göre ağırlık (2026-10-05: types_of_people 1389, plot_twist 1175, mom_logic 1084,
 # expectation_reality 1006, caught 994); yeni şablonlar denensin diye orta ağırlıkta
 TEMPLATE_WEIGHTS = {'types_of_people': 4, 'plot_twist': 3, 'mom_logic': 3, 'expectation_reality': 2, 'caught': 2,
-                    'sibling_war': 3, 'pov': 2, 'rules_of': 2}
+                    'sibling_war': 3, 'pov': 2, 'rules_of': 2,
+                    'normal_vs_psycho': 3}  # 2026-10-08: Bloop Bonkers'ta bu format 83K izlendi
 LONG_SERIES = {
     'dexs_terrible_ideas': "Dex's Terrible Ideas: one of Dex's business/life plans turns into a disaster.",
     'growing_up_with_mama_rose': 'Growing Up With Mama Rose: family memories, rules and chaos at home.',
@@ -182,6 +186,33 @@ def load_hist(path):
 
 
 
+
+def template_performance():
+    """Shorts şablonlarının kendi videolarımızdaki ortalama izlenmesi (en az 20 saatlik; YouTube'a erişilemezse boş)."""
+    import csv
+    path = Path(__file__).resolve().parent.parent / 'published.csv'
+    if not path.exists() or not os.environ.get('YT_REFRESH_TOKEN'):
+        return {}
+    now = datetime.now(timezone.utc)
+    rows = [r for r in csv.DictReader(open(path, encoding='utf-8'))
+            if r.get('format', 'short') == 'short' and r.get('video_id') and r.get('template') in SHORT_TEMPLATES
+            and (now - datetime.strptime(r['date_utc'], '%Y-%m-%d %H:%M').replace(tzinfo=timezone.utc)).total_seconds() > 20 * 3600]
+    rows = rows[-40:]
+    if not rows:
+        return {}
+    try:
+        import upload
+        items = upload.client().videos().list(part='statistics', id=','.join(r['video_id'] for r in rows)).execute()['items']
+    except Exception as e:  # noqa: BLE001
+        print(f'[writer] performans okunamadı: {str(e)[:150]}', flush=True)
+        return {}
+    views = {i['id']: int(i['statistics'].get('viewCount', 0)) for i in items}
+    out = {}
+    for r in rows:
+        if r['video_id'] in views:
+            out.setdefault(r['template'], []).append(views[r['video_id']])
+    return {k: sum(v) / len(v) for k, v in out.items()}
+
 def viewer_request(path, rnd, chance=0.5):
     """Yorumlardan gelen izleyici isteği (tools/auto_reply.py yazar): varsa yarı olasılıkla sıradaki konu olur."""
     if not path.exists() or rnd.random() > chance:
@@ -200,7 +231,14 @@ def pick(hist, fmt, rnd):
     if fmt == 'short':
         last = recent[-1]['template'] if recent else None
         options = [k for k in SHORT_TEMPLATES if k != last]
-        template = rnd.choices(options, weights=[TEMPLATE_WEIGHTS.get(k, 1) for k in options])[0]
+        perf = template_performance()
+        top = max(perf.values(), default=0)
+        # keşif + sömürü: sabit ağırlık taban, iyi giden şablon izlenmesine göre en fazla 6
+        w = [max(TEMPLATE_WEIGHTS.get(k, 1), 1.0 + 5.0 * perf[k] / top) if top and k in perf
+             else TEMPLATE_WEIGHTS.get(k, 1) for k in options]
+        if perf:
+            print('[writer] şablon ortalama izlenme:', {k: round(v) for k, v in perf.items()}, flush=True)
+        template = rnd.choices(options, weights=w)[0]
     else:
         done = [r['template'] for r in recent]
         order = list(LONG_SERIES)
