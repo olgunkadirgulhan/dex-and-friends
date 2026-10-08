@@ -109,7 +109,41 @@ FIRST = {
 }
 
 
-def first_question(title: str, desc: str) -> str:
+def topic_of(title: str) -> str:
+    """Başlıktan konu: '5 German words: Family 👨‍👩‍👧 | A1' → 'Family', '... dialogue? At the café ☕' → 'At the café'."""
+    t = re.sub(r'#\S+', '', title)
+    parts = [p.strip() for p in re.split(r'\s[|·]\s', t)]
+    for p in parts[1:]:  # '| Konut ve kira' gibi konu etiketi (seviye etiketi değilse)
+        if not re.fullmatch(r'(level\s)?[ABC][12]', p, re.I) and 2 < len(p) < 30:
+            return _clean(p)
+    main = parts[0]
+    if '?' in main and len(main.split('?', 1)[1].strip()) > 2:
+        main = main.split('?', 1)[1]
+    elif ':' in main:
+        left, right = main.split(':', 1)
+        generic = re.compile(r'diyalog|dialogue|conversation|quiz|words|kelime|vs\b|level', re.I)
+        main = left if (generic.search(right) and not generic.search(left)) or len(right.strip()) <= 2 else right
+    main = re.split('[!?\U0001F000-\U0001FFFF\u2600-\u27BF]', main)[0]  # emoji/!/? öncesi
+    return _clean(main)
+
+
+def _clean(t: str) -> str:
+    t = re.sub('[\U0001F000-\U0001FFFF\u2600-\u27BF\u200d\ufe0f]', '', t)
+    t = re.sub(r'\b(Edition|Glow-Up)\b', '', t)
+    return re.sub(r'\s+', ' ', re.sub(r'[^\w\s&\'-]', ' ', t)).strip()[:40]
+
+
+def pick_question(pool: list, title: str, state: dict) -> str:
+    """Havuzdan, son 6 kullanılanı tekrar etmeden; {topic} başlıktan doldurulur."""
+    recent = state.setdefault('recent_q', [])
+    topic = topic_of(title)
+    cands = [q for q in pool if q not in recent and ('{topic}' not in q or topic)] or pool
+    q = random.choice(cands)
+    state['recent_q'] = (recent + [q])[-6:]
+    return q.replace('{topic}', topic)
+
+
+def first_question(title: str, desc: str, state: dict | None = None) -> str:
     key = os.environ.get('GEMINI_API_KEY')
     if key:
         rules = ('It is a finance channel: ask for an opinion (e.g. will the move continue?), never ask what to buy '
@@ -131,7 +165,14 @@ def first_question(title: str, desc: str) -> str:
                         return t
             except Exception:  # noqa: BLE001
                 continue
-    return random.choice(FIRST.get(LANG, FIRST['en']))
+    pool = FIRST.get(LANG, FIRST['en'])
+    custom = os.environ.get('FIRST_QUESTIONS')  # kanala özel soru havuzu (JSON liste), Gemini anahtarı yoksa
+    if custom:
+        try:
+            pool = json.loads(custom)
+        except Exception:  # noqa: BLE001
+            pass
+    return pick_question(pool, title, state if state is not None else {})
 
 
 def first_comments(yt, cid, state):
@@ -156,7 +197,7 @@ def first_comments(yt, cid, state):
             print(f"{v['id']}: yorumlar kapalı ({str(e)[:80]})"); done.add(v['id']); continue
         if any(t['snippet']['topLevelComment']['snippet'].get('authorChannelId', {}).get('value') == cid for t in th):
             done.add(v['id']); continue
-        q = first_question(v['snippet']['title'], v['snippet'].get('description', ''))
+        q = first_question(v['snippet']['title'], v['snippet'].get('description', ''), state)
         yt.commentThreads().insert(part='snippet', body={'snippet': {'videoId': v['id'], 'topLevelComment': {
             'snippet': {'textOriginal': q}}}}).execute()
         done.add(v['id'])
