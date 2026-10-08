@@ -9,7 +9,8 @@ sıradaki konu olarak kullanır.
 Kurallar (YouTube spam politikasına takılmamak için):
   - Her cevap yoruma özel ve yorumun dilinde (Gemini yazar; yoksa çeşitli hazır kalıplar), kısa, 1-2 emoji
   - Link / reklam / hakaret / çok uzun yorumlara cevap yok; kanalın kendi yorumlarına ve zaten cevaplananlara yok
-  - Son 7 günün yorumları, çalışma başına en fazla MAX_PER_RUN cevap; her yoruma bir kez (comment_replies.json)
+  - Son 7 günün yorumları, çalışma başına en fazla MAX_PER_RUN, günde en fazla MAX_REPLIES_PER_DAY (15) cevap;
+    önce soru/uzun yorumlar, çok kısa ('nice 😂') yorumların yarısı cevapsız kalır; her yoruma bir kez
   - CHANNEL_KIND=finance: soru gelse de tavsiye yok, sadece teşekkür
 Env: YT_CLIENT_ID/SECRET/REFRESH_TOKEN (ya da YOUTUBE_*), GEMINI_API_KEY (opsiyonel), CHANNEL_NAME, CHANNEL_ABOUT,
      CHANNEL_KIND (general|finance), STATE_FILE (varsayılan comment_replies.json), MAX_PER_RUN (varsayılan 10)
@@ -33,6 +34,7 @@ REQUESTS = Path(os.environ.get('REQUESTS_FILE', 'viewer_requests.json'))
 ASKS = re.compile(r'(make|do (a|one)|next|can you|could you|please|video (about|on)|part 2|more of|'
                   r'yap(ın|sanıza|ar mısınız|abilir misiniz)|bir de|lütfen|sonraki|devamı|istiyoruz|anlatır mısınız)', re.I)
 MAX = int(os.environ.get('MAX_PER_RUN', '10'))
+DAILY = int(os.environ.get('MAX_REPLIES_PER_DAY', '15'))  # spam filtresine karşı kanal başına günlük üst sınır
 KIND = os.environ.get('CHANNEL_KIND', 'general')
 NAME = os.environ.get('CHANNEL_NAME', 'our channel')
 ABOUT = os.environ.get('CHANNEL_ABOUT', '')
@@ -275,9 +277,18 @@ def run_once():
                                            order='time', textFormat='plainText').execute().get('items', [])
     except Exception as e:  # noqa: BLE001 — yorumlar kapalı kanal vb.
         print(f'yorumlar alınamadı: {e}'); return
+    today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    day = state.setdefault('day', {})
+    if day.get('date') != today:
+        day.update(date=today, count=0)
+    # öncelik: soru içeren ve uzun yorumlar; çok kısa/emoji yorumların sadece bir kısmına cevap (doğal görünüm)
+    def priority(t):
+        txt = t['snippet']['topLevelComment']['snippet'].get('textDisplay', '')
+        return ('?' in txt) * 2 + (len(txt) > 40)
+    threads = sorted(threads, key=priority, reverse=True)
     sent = 0
     for t in threads:
-        if sent >= MAX:
+        if sent >= MAX or day['count'] >= DAILY:
             break
         top = t['snippet']['topLevelComment']
         sn = top['snippet']
@@ -291,12 +302,14 @@ def run_once():
         text = sn.get('textDisplay') or sn.get('textOriginal') or ''
         if not text.strip() or len(text) > 600 or SKIP.search(text) or RUDE.search(text):
             done.add(top['id']); continue
+        if len(re.sub(r'\W', '', text)) < 6 and random.random() < 0.5:  # 'nice 😂' gibi: yarısına cevap
+            done.add(top['id']); continue
         req = extract_request(text)
         if req:
             save_request(req, text, sn.get('videoId', ''))
         reply = gemini(text) or random.choice(TEMPLATES[lang(text)])
         yt.comments().insert(part='snippet', body={'snippet': {'parentId': top['id'], 'textOriginal': reply}}).execute()
-        done.add(top['id']); sent += 1
+        done.add(top['id']); sent += 1; day['count'] += 1
         print(f'↩︎ "{text[:60]}" → "{reply}"')
     state['replied'] = list(done)[-2000:]
     STATE.write_text(json.dumps(state, indent=1, ensure_ascii=False) + '\n')
