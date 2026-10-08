@@ -1,8 +1,8 @@
 name: comments
-# Yorumlara kişisel otomatik cevap (tools/auto_reply.py), 3 saatte bir
+# Yeni videolara ilk yorum + yorumlara kişisel cevap (tools/auto_reply.py), saatte bir
 on:
   schedule:
-    - cron: "37 */3 * * *"
+    - cron: "37 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -30,6 +30,7 @@ jobs:
           CHANNEL_NAME: "Dex & Friends"
           CHANNEL_ABOUT: "Funny animated stick-figure comedy Shorts about family, school and everyday life."
           CHANNEL_KIND: general
+          CHANNEL_LANG: en
         run: python tools/auto_reply.py
       - run: |
           git config user.name "comment-bot"

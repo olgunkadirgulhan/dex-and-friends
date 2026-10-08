@@ -1,4 +1,7 @@
-"""Yorumlara otomatik, kişisel cevap (GitHub Actions 'comments' iş akışı, 3 saatte bir).
+"""Yorumlara otomatik, kişisel cevap + yeni videolara ilk yorum (GitHub Actions 'comments' iş akışı, saatte bir).
+
+Ayrıca: son 48 saatte yayınlanan ve kanalın henüz yorum yazmadığı her videoya, o videoya özel bir soru ile
+"ilk yorum" (FIRST_COMMENT=1, CHANNEL_LANG=en|tr|de). "Like/subscribe" ve link yok.
 
 Kurallar (YouTube spam politikasına takılmamak için):
   - Her cevap yoruma özel ve yorumun dilinde (Gemini yazar; yoksa çeşitli hazır kalıplar), kısa, 1-2 emoji
@@ -97,6 +100,70 @@ def gemini(comment: str) -> str | None:
     return None
 
 
+LANG = os.environ.get('CHANNEL_LANG', 'en')
+FIRST = {
+    'en': ['Which part made you laugh the most? 😄', 'Did you see that coming? 👀', 'What should we make next? 💡',
+           'Be honest, how many did you get right? 🤔', 'Rate this one from 1 to 10 👇'],
+    'tr': ['En çok hangi kısım güldürdü? 😄', 'Bunu bekliyor muydun? 👀', 'Sıradaki video ne olsun? 💡',
+           'Dürüst ol, kaçını bildin? 🤔', 'Bu videoya 1-10 arası puan ver 👇'],
+}
+
+
+def first_question(title: str, desc: str) -> str:
+    key = os.environ.get('GEMINI_API_KEY')
+    if key:
+        rules = ('It is a finance channel: ask for an opinion (e.g. will the move continue?), never ask what to buy '
+                 'and never give advice. ' if KIND == 'finance' else '')
+        prompt = (f'You run the YouTube channel "{NAME}". {ABOUT}\nWrite the first comment under your new Short, in '
+                  f'{"Turkish" if LANG == "tr" else "German" if LANG == "de" else "English"}: ONE short question (max 14 '
+                  f'words) about THIS video that viewers can answer in a few words, plus 1 emoji. No "like", '
+                  f'"subscribe", links or hashtags. {rules}Output only the comment.\n\nVideo title: {title}\n'
+                  f'Description: {desc[:400]}')
+        for model in ('gemini-flash-latest', 'gemini-flash-lite-latest', 'gemini-3.5-flash'):
+            try:
+                r = requests.post(f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
+                                  json={'contents': [{'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.9}},
+                                  headers={'x-goog-api-key': key}, timeout=40)
+                if r.status_code == 200:
+                    parts = r.json()['candidates'][0]['content']['parts']
+                    t = ''.join(p.get('text', '') for p in parts if not p.get('thought')).strip().strip('"')
+                    if t and not SKIP.search(t) and len(t) <= 160 and not re.search(r'subscri|abone|like', t, re.I):
+                        return t
+            except Exception:  # noqa: BLE001
+                continue
+    return random.choice(FIRST.get(LANG, FIRST['en']))
+
+
+def first_comments(yt, cid, state):
+    """Son 48 saatte yüklenen ve kanalın henüz yorum yazmadığı her videoya, videoya özel bir soru."""
+    uploads = yt.channels().list(part='contentDetails', id=cid).execute()['items'][0]['contentDetails'][
+        'relatedPlaylists']['uploads']
+    items = yt.playlistItems().list(part='contentDetails', playlistId=uploads, maxResults=10).execute().get('items', [])
+    ids = [i['contentDetails']['videoId'] for i in items]
+    if not ids:
+        return
+    vids = yt.videos().list(part='snippet,status', id=','.join(ids)).execute().get('items', [])
+    since = datetime.now(timezone.utc) - timedelta(hours=48)
+    done = set(state.setdefault('first', []))
+    for v in vids:
+        if v['id'] in done or v['status'].get('privacyStatus') != 'public':
+            continue
+        if datetime.fromisoformat(v['snippet']['publishedAt'].replace('Z', '+00:00')) < since:
+            done.add(v['id']); continue
+        try:
+            th = yt.commentThreads().list(part='snippet', videoId=v['id'], maxResults=50).execute().get('items', [])
+        except Exception as e:  # noqa: BLE001 — yorumları kapalı video
+            print(f"{v['id']}: yorumlar kapalı ({str(e)[:80]})"); done.add(v['id']); continue
+        if any(t['snippet']['topLevelComment']['snippet'].get('authorChannelId', {}).get('value') == cid for t in th):
+            done.add(v['id']); continue
+        q = first_question(v['snippet']['title'], v['snippet'].get('description', ''))
+        yt.commentThreads().insert(part='snippet', body={'snippet': {'videoId': v['id'], 'topLevelComment': {
+            'snippet': {'textOriginal': q}}}}).execute()
+        done.add(v['id'])
+        print(f"💬 ilk yorum {v['id']}: {q}")
+    state['first'] = list(done)[-500:]
+
+
 def main():
     c = creds()
     if not has_force_ssl(c):
@@ -105,6 +172,11 @@ def main():
     yt = build('youtube', 'v3', credentials=c, cache_discovery=False)
     cid = yt.channels().list(part='id', mine=True).execute()['items'][0]['id']
     state = json.loads(STATE.read_text()) if STATE.exists() else {'replied': []}
+    if os.environ.get('FIRST_COMMENT', '1') == '1':
+        try:
+            first_comments(yt, cid, state)
+        except Exception as e:  # noqa: BLE001 — ilk yorum hatası cevapları durdurmasın
+            print(f'ilk yorum hatası: {str(e)[:200]}')
     done = set(state['replied'])
     since = datetime.now(timezone.utc) - timedelta(days=7)
     try:
