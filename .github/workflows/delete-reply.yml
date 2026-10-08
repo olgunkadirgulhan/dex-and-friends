@@ -1,0 +1,24 @@
+name: delete-reply
+# Kanalın kendi yazdığı bir yorum cevabını metnine göre siler (elle)
+on:
+  workflow_dispatch:
+    inputs:
+      text:
+        description: Silinecek cevabın içindeki metin
+        required: true
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q google-api-python-client google-auth requests
+      - env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          TEXT: ${{ inputs.text }}
+        run: python tools/delete_reply.py "$TEXT"
