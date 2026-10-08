@@ -1,0 +1,40 @@
+name: comments
+# Yorumlara kişisel otomatik cevap (tools/auto_reply.py), 3 saatte bir
+on:
+  schedule:
+    - cron: "37 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: comments
+  cancel-in-progress: false
+
+jobs:
+  reply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q google-api-python-client google-auth requests
+      - env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CHANNEL_NAME: "Dex & Friends"
+          CHANNEL_ABOUT: "Funny animated stick-figure comedy Shorts about family, school and everyday life."
+          CHANNEL_KIND: general
+        run: python tools/auto_reply.py
+      - run: |
+          git config user.name "comment-bot"
+          git config user.email "bot@users.noreply.github.com"
+          [ -e comment_replies.json ] && git add comment_replies.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m "comments: $(date -u +%F-%H%M)"
+          for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done

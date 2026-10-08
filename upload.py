@@ -6,7 +6,7 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
 # tam 'youtube' izni: yükleme + oynatma listesi + kanal ayarları (ileride kanal ayarları)
-SCOPES = ['https://www.googleapis.com/auth/youtube']
+SCOPES = ['https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.force-ssl']  # force-ssl: yorum cevapları
 
 
 class QuotaError(Exception):
