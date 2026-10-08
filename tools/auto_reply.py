@@ -166,9 +166,8 @@ def first_comments(yt, cid, state):
 
 def main():
     c = creds()
-    if not has_force_ssl(c):
-        print('⚠️ Bu bağlantıda yorum izni (youtube.force-ssl) yok: auth_setup.py ile yeniden bağlan. Atlandı.')
-        return
+    if not has_force_ssl(c):  # tokeninfo bazen eksik kapsam döndürüyor → sadece uyarı, işlem denenir
+        print('ℹ️ tokeninfo force-ssl göstermedi; deneniyor (403 gelirse auth_setup.py ile yeniden bağlan)')
     yt = build('youtube', 'v3', credentials=c, cache_discovery=False)
     cid = yt.channels().list(part='id', mine=True).execute()['items'][0]['id']
     state = json.loads(STATE.read_text()) if STATE.exists() else {'replied': []}
