@@ -75,7 +75,10 @@ def gemini(comment: str) -> str | None:
     prompt = (f'You are the friendly creator of the YouTube channel "{NAME}". {ABOUT}\n'
               f'Write a reply to this viewer comment in the SAME language as the comment. Max 15 words, warm and '
               f'specific to what they said, 1-2 emojis. No links, no hashtags, no asking for subscriptions, no promises. '
-              f'{rules}If the comment is negative, reply politely and briefly. Output only the reply text.\n\n'
+              f'{rules}Be honest: never claim how the videos are made, never pretend to be a person doing human things '
+              f'(homework, drawing by hand, brainstorming), never deny that AI is used. If asked how it is made, say '
+              f'it is made with the help of AI tools. If the comment is negative, reply politely and briefly. '
+              f'Output only the reply text.\n\n'
               f'Comment: """{comment[:500]}"""')
     for model in ('gemini-flash-latest', 'gemini-flash-lite-latest', 'gemini-3.5-flash'):
         try:

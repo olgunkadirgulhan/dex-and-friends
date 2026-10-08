@@ -27,7 +27,16 @@ def main():
     flow = InstalledAppFlow.from_client_secrets_file(str(SECRET), SCOPES)
     creds = flow.run_local_server(port=0, prompt='consent select_account', access_type='offline')
     yt = build('youtube', 'v3', credentials=creds, cache_discovery=False)
-    items = yt.channels().list(part='id,snippet', mine=True).execute().get('items', [])
+    import time
+    for attempt in range(8):  # yeni verilen izin YouTube'a birkaç saniye geç ulaşabiliyor (401)
+        try:
+            items = yt.channels().list(part='id,snippet', mine=True).execute().get('items', [])
+            break
+        except Exception as e:  # noqa: BLE001
+            if '401' not in str(e) or attempt == 7:
+                raise
+            print('YouTube izni henüz yansımadı, bekleniyor...', flush=True)
+            time.sleep(15)
     if not items:
         sys.exit('bu hesapta YouTube kanalı yok')
     cid, title = items[0]['id'], items[0]['snippet']['title']
