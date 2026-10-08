@@ -243,6 +243,18 @@ def first_comments(yt, cid, state):
 
 
 def main():
+    import time
+    for attempt in range(3):  # Google arada bir geçici 401 veriyor: bağlantıyı yenileyip tekrar dene
+        try:
+            return run_once()
+        except Exception as e:  # noqa: BLE001
+            if '401' not in str(e) or attempt == 2:
+                raise
+            print(f'geçici 401, {20 * (attempt + 1)} sn sonra tekrar deneniyor', flush=True)
+            time.sleep(20 * (attempt + 1))
+
+
+def run_once():
     c = creds()
     if not has_force_ssl(c):  # tokeninfo bazen eksik kapsam döndürüyor → sadece uyarı, işlem denenir
         print('ℹ️ tokeninfo force-ssl göstermedi; deneniyor (403 gelirse auth_setup.py ile yeniden bağlan)')
@@ -253,6 +265,8 @@ def main():
         try:
             first_comments(yt, cid, state)
         except Exception as e:  # noqa: BLE001 — ilk yorum hatası cevapları durdurmasın
+            if '401' in str(e):
+                raise  # üstte yeniden denenir
             print(f'ilk yorum hatası: {str(e)[:200]}')
     done = set(state['replied'])
     since = datetime.now(timezone.utc) - timedelta(days=7)
