@@ -633,13 +633,23 @@ def render(sc, out_dir, preview_png=None):
            '-r', str(FPS), '-i', '-', '-i', str(wav), '-map', '0:v', '-map', '1:a',
            '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-pix_fmt', 'yuv420p', '-movflags', '+faststart',
            '-c:a', 'aac', '-b:a', '192k', '-shortest', str(mp4)]
+    loop = fmt == 'short'   # Shorts başa sarar: son 0.45 sn ilk kareye karışır, ses yumuşak biter (kesintisiz döngü)
+    if loop:
+        cmd[cmd.index('-c:a'):cmd.index('-c:a')] = ['-af', f'afade=t=out:st={max(0.0, total - 0.3):.2f}:d=0.3']
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     n = int(total * FPS)
     prev = None
+    first = None
     for i in range(n):
         t = i / FPS
         prev = R.frame(t, prev)
-        proc.stdin.write(bytes(R.surf.get_data()))
+        buf = bytes(R.surf.get_data())
+        if i == 0:
+            first = np.frombuffer(buf, np.uint8).astype(np.float32)
+        if loop and t > total - 0.45:
+            k = min(1.0, (t - (total - 0.45)) / 0.45)
+            buf = (np.frombuffer(buf, np.uint8).astype(np.float32) * (1 - k) + first * k).astype(np.uint8).tobytes()
+        proc.stdin.write(buf)
         if preview_png and i == int(n * 0.3):
             R.surf.write_to_png(str(preview_png))
         if i % (FPS * 10) == 0:
