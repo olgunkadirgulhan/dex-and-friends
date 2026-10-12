@@ -84,7 +84,7 @@ def gemini(comment: str) -> str | None:
     rules = ('Never give financial advice, price predictions or opinions on buying/selling; if asked, just thank '
              'them and say it is not financial advice. ' if KIND == 'finance' else '')
     prompt = (f'You are the friendly creator of the YouTube channel "{NAME}". {ABOUT}\n'
-              f'Write a reply to this viewer comment in the SAME language as the comment. Max 15 words, warm and '
+              f'Write a reply to this viewer comment in the SAME language as the comment (if it is only names, emojis, numbers or the language is unclear, reply in {"Turkish" if os.environ.get("CHANNEL_LANG", "en") == "tr" else "German" if os.environ.get("CHANNEL_LANG") == "de" else "English"}). Max 15 words, warm and '
               f'specific to what they said, 1-2 emojis. No links, no hashtags, no asking for subscriptions, no promises. '
               f'{rules}Be honest: never claim how the videos are made, never pretend to be a person doing human things '
               f'(homework, drawing by hand, brainstorming), never deny that AI is used. If asked how it is made, say '
