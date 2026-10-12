@@ -46,7 +46,10 @@ LONG_SERIES = {
     'dexs_terrible_ideas': "Dex's Terrible Ideas: one of Dex's business/life plans turns into a disaster.",
     'growing_up_with_mama_rose': 'Growing Up With Mama Rose: family memories, rules and chaos at home.',
     'big_tonys_business_lessons': "Big Tony's Business Lessons: Big Tony 'teaches' business and it backfires.",
+    'normal_vs_psycho_episode': 'Normal vs Psycho episode: 8 everyday situations, each shown the normal way and the psycho way.',
 }
+# 2026-10-13: eski uzun hikâye serileri 35-236 izlenme aldı; Bloop'ta yatay "normal vs psycho" bölümü 9.7K → sadece bu
+LONG_ACTIVE = ['normal_vs_psycho_episode']
 TOPICS = ['college', 'parents rules', 'sibling fight', 'first job', 'paying rent', 'going to the doctor', 'diet',
           'the gym', 'meeting the girlfriend\'s parents', 'a wedding', 'vacation', 'phone addiction',
           'the night before an exam', 'the neighbor', 'holiday dinner', 'grocery shopping', 'traffic',
@@ -246,7 +249,7 @@ def pick(hist, fmt, rnd):
         template = rnd.choices(options, weights=w)[0]
     else:
         done = [r['template'] for r in recent]
-        order = list(LONG_SERIES)
+        order = LONG_ACTIVE
         template = order[len(done) % len(order)]
     used = {r.get('topic') for r in hist['recent'][-30:]}
     topic = rnd.choice([t for t in TOPICS if t not in used] or TOPICS)
@@ -268,7 +271,8 @@ def schema_text():
 
 
 def write_with_gemini(fmt, template, topic, hist):
-    base = (PROMPTS / ('script_short.txt' if fmt == 'short' else 'script_long.txt')).read_text(encoding='utf-8')
+    base = (PROMPTS / ('script_short.txt' if fmt == 'short' else 'script_long_nvp.txt' if template == 'normal_vs_psycho_episode'
+                       else 'script_long.txt')).read_text(encoding='utf-8')
     recent_titles = '\n'.join('- ' + r.get('title', '') for r in hist['recent'][-30:])
     prompt = base.format(
         character_bible=bible(),

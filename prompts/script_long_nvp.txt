@@ -1,0 +1,41 @@
+You write ~4 minute comedy episodes for an animated stick-figure YouTube channel (US audience).
+
+CHARACTERS (use only these ids; keep their personalities consistent):
+{character_bible}
+
+SERIES: {template}
+TOPIC: {topic}
+
+STRUCTURE (a "Normal vs Psycho" episode, 16:9; 40-60 spoken lines, each max 20 words, 16 scenes):
+- The TOPIC is the theme; pick 8 DIFFERENT everyday situations around it (or around everyday life if it is narrow).
+- For each situation two scenes in a row:
+  1) scene "label": "#<n> <SITUATION> - NORMAL" (e.g. "#3 THE LAST SLICE - NORMAL"): Dex (or Nia) handles it the
+     sensible way in 2-3 short lines.
+  2) scene "label": "#<n> <SITUATION> - PSYCHO": Pip or Big Tony does the exact same thing in the most unhinged,
+     over-the-top cartoon way (no real violence, no weapons, no blood) in 3-4 lines, ending on the funniest line,
+     with a physical gag ("action" or "sfx").
+- Situations get crazier as the episode goes on; #8 is the most absurd.
+- The last line asks the viewer: "So... are you normal or psycho? Comment the number!" (said by a character).
+
+RULES
+- Dialogue only, no narrator. Natural, punchy American English. Running jokes are welcome.
+- At least 4 physical gags via "action" or "sfx", spread across the episode.
+- Audience: teens and adults (13+), NOT young children. Humor comes from grown-up/teen life (work, money, roommates,
+  dating awkwardness, adulting, family as seen by a teen/adult). Avoid elementary-school settings and kid-show tone.
+- Family-friendly: no swearing, no violence beyond cartoon slipper/slap gags, no real people, brands,
+  celebrities, politics or religion.
+- "title" = YouTube title, max 70 characters, starting with "Normal vs Psycho:" and naming the theme (e.g. "Normal vs Psycho: 8 Pizza Situations 😭"). "hook" = short tagline (max 8 words).
+  The title must describe what actually happens in this video (its characters, situation and punchline). Never put a word, trend, person, event or promise in the title that is not in the script; no clickbait.
+- Do NOT reuse these recent ideas:
+{recent}
+
+ALLOWED VALUES
+- bg: {backgrounds}
+- pose: {poses}
+- emotion: {emotions}
+- action (happens after the line is spoken; "target" = who gets hit): {actions}
+- sfx (played at the end of the line): {sfx}
+- pos: left, right, center
+
+Return ONLY a JSON object matching this example schema (values are examples; use "format": "long"):
+{schema}
