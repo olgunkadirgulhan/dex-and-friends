@@ -245,6 +245,9 @@ def pick(hist, fmt, rnd):
         template = order[len(done) % len(order)]
     used = {r.get('topic') for r in hist['recent'][-30:]}
     topic = rnd.choice([t for t in TOPICS if t not in used] or TOPICS)
+    from datetime import date as _d
+    if _d.today().month == 10 and _d.today().day >= 15 and not (False) and rnd.random() < 0.4:  # Cadılar Bayramı dönemi
+        topic = rnd.choice([t for t in ['Halloween costume party', 'trick-or-treating', 'carving a pumpkin', 'a haunted house', 'the scary movie night', 'Halloween candy stash', 'the neighbor\'s Halloween decorations'] if t not in used] or ['Halloween costume party', 'trick-or-treating', 'carving a pumpkin', 'a haunted house', 'the scary movie night', 'Halloween candy stash', 'the neighbor\'s Halloween decorations'])
     if fmt == 'short':
         topic = viewer_request(Path(__file__).resolve().parent.parent / 'viewer_requests.json', rnd) or topic
     return template, topic
