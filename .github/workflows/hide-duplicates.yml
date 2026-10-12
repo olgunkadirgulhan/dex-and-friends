@@ -1,0 +1,24 @@
+name: hide-duplicates
+# Aynı başlıklı herkese açık kopyaları gizli yapar (silmez)
+on:
+  workflow_dispatch:
+    inputs:
+      dry:
+        type: boolean
+        default: true
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q google-api-python-client google-auth requests
+      - run: python tools/hide_duplicates.py
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          DRY: ${{ inputs.dry && '1' || '0' }}
