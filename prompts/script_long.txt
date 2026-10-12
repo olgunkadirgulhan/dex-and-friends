@@ -21,6 +21,7 @@ RULES
 - Family-friendly: no swearing, no violence beyond cartoon slipper/slap gags, no real people, brands,
   celebrities, politics or religion.
 - "title" = YouTube title, max 70 characters. "hook" = short tagline (max 8 words).
+  The title must describe what actually happens in this video (its characters, situation and punchline). Never put a word, trend, person, event or promise in the title that is not in the script; no clickbait.
 - Do NOT reuse these recent ideas:
 {recent}
 

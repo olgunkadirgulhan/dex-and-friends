@@ -19,6 +19,7 @@ RULES
   no real people, brands, celebrities, politics or religion.
 - "hook" = on-screen top caption, max 8 words, like "When mom finds the empty cake box".
 - "title" = YouTube title, max 70 characters, curiosity-driven, may end with one emoji.
+  The title must describe what actually happens in this video (its characters, situation and punchline). Never put a word, trend, person, event or promise in the title that is not in the script; no clickbait.
 - Do NOT reuse these recent ideas:
 {recent}
 
