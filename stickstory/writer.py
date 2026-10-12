@@ -41,7 +41,7 @@ SHORT_TEMPLATES = {
 # expectation_reality 1006, caught 994); yeni şablonlar denensin diye orta ağırlıkta
 TEMPLATE_WEIGHTS = {'types_of_people': 4, 'plot_twist': 3, 'mom_logic': 3, 'expectation_reality': 2, 'caught': 2,
                     'sibling_war': 3, 'pov': 2, 'rules_of': 2,
-                    'normal_vs_psycho': 3}  # 2026-10-08: Bloop Bonkers'ta bu format 83K izlendi
+                    'normal_vs_psycho': 5}  # 2026-10-13: Dex'te en çok yorum + medyan üstü (1.2-1.3K); Bloop'ta 18-117K
 LONG_SERIES = {
     'dexs_terrible_ideas': "Dex's Terrible Ideas: one of Dex's business/life plans turns into a disaster.",
     'growing_up_with_mama_rose': 'Growing Up With Mama Rose: family memories, rules and chaos at home.',
