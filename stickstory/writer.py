@@ -62,6 +62,11 @@ TOPICS = ['college', 'parents rules', 'sibling fight', 'first job', 'paying rent
 BANNED = re.compile(r'\b(kill|dead|die|blood|sex|sexy|drunk|beer|wine|drug|damn|hell|stupid idiot|shut up)\b', re.I)
 
 
+TREND_SHARE = 0.35
+TREND_CHANNEL = ('Dex & Friends: stick-figure cartoon comedy about a family and friends in relatable everyday '
+                 'situations (school/college, work, siblings, parents, food, holidays), for teens and adults 13+.')
+TREND_SEEDS = ['types of people', 'pov when you', 'relatable', 'when your mom']
+
 def log(m):
     print(f'[writer] {m}', flush=True)
 
@@ -248,6 +253,11 @@ def pick(hist, fmt, rnd):
     from datetime import date as _d
     if _d.today().month == 10 and _d.today().day >= 15 and not (False) and rnd.random() < 0.4:  # Cadılar Bayramı dönemi
         topic = rnd.choice([t for t in ['Halloween costume party', 'trick-or-treating', 'carving a pumpkin', 'a haunted house', 'the scary movie night', 'Halloween candy stash', 'the neighbor\'s Halloween decorations'] if t not in used] or ['Halloween costume party', 'trick-or-treating', 'carving a pumpkin', 'a haunted house', 'the scary movie night', 'Halloween candy stash', 'the neighbor\'s Halloween decorations'])
+    if fmt == 'short' and os.environ.get('GEMINI_API_KEY') and rnd.random() < TREND_SHARE:   # günün trendi (uyarsa)
+        from . import trend_topic
+        tt_, tr_ = trend_topic.pick(gemini, parse_json, TREND_CHANNEL, trend_topic.fetch('US', TREND_SEEDS), used)
+        if tt_:
+            log(f'trend konusu: {tt_}  (trend: {tr_})'); topic = tt_
     if fmt == 'short':
         topic = viewer_request(Path(__file__).resolve().parent.parent / 'viewer_requests.json', rnd) or topic
     return template, topic
