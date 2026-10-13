@@ -44,7 +44,7 @@ jobs:
       - id: g
         env:
           LOG_FILE: published.csv
-          SLOTS: "13:00,17:00,22:00"
+          SLOTS: "14:00,17:30,20:30"   # 2026-10-13 veri: UTC 18-21 en iyi, 21-24 en zayıf
           # uzun videolar medyan 156 izlenme (short 1175): haftada bire indirildi
           LONG: "sat 17:00 long"
         run: python3 .github/slot_guard.py
