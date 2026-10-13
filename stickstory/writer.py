@@ -29,15 +29,13 @@ SHORT_TEMPLATES = {
     'plot_twist': 'Plot Twist: a normal conversation -> a totally unexpected twist in the last 3 seconds.',
     'sibling_war': 'Sibling War: Dex and Pip fight over something tiny -> it escalates absurdly -> Mama Rose '
                    'ends it in the last line.',
-    'pov': 'POV: the hook starts with "POV:" and puts the viewer in a relatable everyday moment; the characters '
-           'react to "you" (the viewer) and it gets worse each line.',
     'rules_of': 'Unspoken Rules: "Unspoken rules of X" -> 3 quick scenes, each a rule (scene label "Rule #1" ...), '
                 'the last rule breaks the fourth wall.',
 }
 # Medyan izlenmeye göre ağırlık (2026-10-05: types_of_people 1389, plot_twist 1175, mom_logic 1084,
 # expectation_reality 1006, caught 994); yeni şablonlar denensin diye orta ağırlıkta
 TEMPLATE_WEIGHTS = {'types_of_people': 4, 'plot_twist': 3, 'mom_logic': 3, 'expectation_reality': 2, 'caught': 2,
-                    'sibling_war': 3, 'pov': 2, 'rules_of': 2}
+                    'sibling_war': 3, 'rules_of': 2}   # 'pov' Fruit Drama Club'a ait (2026-10-14)
 # 2026-10-14: 'normal_vs_psycho' kaldırıldı — Bloop'un imza formatı; kanallar birbirine benzemesin (kullanıcı kuralı)
 LONG_SERIES = {
     'dexs_terrible_ideas': "Dex's Terrible Ideas: one of Dex's business/life plans turns into a disaster.",
