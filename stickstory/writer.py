@@ -31,25 +31,25 @@ SHORT_TEMPLATES = {
                    'ends it in the last line.',
     'pov': 'POV: the hook starts with "POV:" and puts the viewer in a relatable everyday moment; the characters '
            'react to "you" (the viewer) and it gets worse each line.',
-    'normal_vs_psycho': 'Normal vs Psycho: the same everyday situation shown twice - scene label "Normal" (Dex does '
-                        'it the sensible way), then scene label "Psycho" (Pip or Big Tony does it in the most unhinged, '
-                        'over-the-top cartoon way, no real violence); the psycho version ends on the funniest line.',
     'rules_of': 'Unspoken Rules: "Unspoken rules of X" -> 3 quick scenes, each a rule (scene label "Rule #1" ...), '
                 'the last rule breaks the fourth wall.',
 }
 # Medyan izlenmeye göre ağırlık (2026-10-05: types_of_people 1389, plot_twist 1175, mom_logic 1084,
 # expectation_reality 1006, caught 994); yeni şablonlar denensin diye orta ağırlıkta
 TEMPLATE_WEIGHTS = {'types_of_people': 4, 'plot_twist': 3, 'mom_logic': 3, 'expectation_reality': 2, 'caught': 2,
-                    'sibling_war': 3, 'pov': 2, 'rules_of': 2,
-                    'normal_vs_psycho': 5}  # 2026-10-13: Dex'te en çok yorum + medyan üstü (1.2-1.3K); Bloop'ta 18-117K
+                    'sibling_war': 3, 'pov': 2, 'rules_of': 2}
+# 2026-10-14: 'normal_vs_psycho' kaldırıldı — Bloop'un imza formatı; kanallar birbirine benzemesin (kullanıcı kuralı)
 LONG_SERIES = {
     'dexs_terrible_ideas': "Dex's Terrible Ideas: one of Dex's business/life plans turns into a disaster.",
     'growing_up_with_mama_rose': 'Growing Up With Mama Rose: family memories, rules and chaos at home.',
     'big_tonys_business_lessons': "Big Tony's Business Lessons: Big Tony 'teaches' business and it backfires.",
-    'normal_vs_psycho_episode': 'Normal vs Psycho episode: 8 everyday situations, each shown the normal way and the psycho way.',
+    'dex_types_episode': 'Types of People with the Dex family: one episode, 6 places (school, gym, airport, wedding, '
+                         'grocery store, family dinner); at each place Dex, Pip, Mama Rose and Big Tony play a different '
+                         'type of person, Mama Rose narrates and rates each type at the end of the place.',
 }
-# 2026-10-13: eski uzun hikâye serileri 35-236 izlenme aldı; Bloop'ta yatay "normal vs psycho" bölümü 9.7K → sadece bu
-LONG_ACTIVE = ['normal_vs_psycho_episode']
+# 2026-10-14: Dex'in kendi uzun formatı: en çok izlenen kısa şablonu (types_of_people) bölüm halinde.
+# Normal vs Psycho bölümü Bloop'a özel (kanallar birbirine benzemesin).
+LONG_ACTIVE = ['dex_types_episode']
 TOPICS = ['college', 'parents rules', 'sibling fight', 'first job', 'paying rent', 'going to the doctor', 'diet',
           'the gym', 'meeting the girlfriend\'s parents', 'a wedding', 'vacation', 'phone addiction',
           'the night before an exam', 'the neighbor', 'holiday dinner', 'grocery shopping', 'traffic',
