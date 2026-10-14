@@ -84,6 +84,14 @@ jobs:
           MAX_PER_DAY: ${{ vars.MAX_PER_DAY }}
           SCRIPT_SOURCE: ${{ vars.SCRIPT_SOURCE }}
         run: python run.py --format ${{ steps.fmt.outputs.f }} ${{ inputs.no_upload && '--no-upload' || '' }}
+      - name: Günün videosu (sosyal medya için)
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: social-${{ github.run_id }}
+          path: social/
+          retention-days: 3
+          if-no-files-found: ignore
       - name: Keep video for review
         if: always()
         uses: actions/upload-artifact@v5

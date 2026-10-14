@@ -100,6 +100,20 @@ def metadata(sc):
     return title, desc, uniq
 
 
+def social(mp4, title, url, sc):
+    """Short → social/ (artifact 'social-<run>'): fenek-shorts sosyal yayıncısı Instagram/TikTok'a koyar."""
+    import shutil
+    soc = HERE / 'social'
+    soc.mkdir(exist_ok=True)
+    shutil.copy(mp4, soc / 'video.mp4')
+    tiktok = f"{title}\n\nTag someone who does this 👇\n\n#dexandfriends #animation #comedy #relatable #funny #fyp"
+    insta = (f"{title}\n\nTag someone who does this 👇\nFollow for a new Dex episode every day\n\n"
+             "#animation #comedy #funny #relatable #cartoon")  # Instagram: en fazla 5 etiket
+    (soc / 'post.json').write_text(json.dumps({'channel': 'Dex & Friends', 'title': title, 'url': url,
+                                               'tiktok': tiktok, 'instagram': insta}, ensure_ascii=False, indent=1),
+                                   encoding='utf-8')
+
+
 def privacy_mode(no_upload):
     import upload
     if no_upload:
@@ -185,6 +199,8 @@ def main():
         qpath.unlink(missing_ok=True)
     url = f'https://youtube.com/shorts/{vid}' if fmt == 'short' else f'https://youtu.be/{vid}'
     log(f'uploaded {url} ({mode})')
+    if fmt == 'short' and mode == 'public':
+        social(mp4, title, url, sc)
     pls = json.loads((HERE / 'playlists.json').read_text(encoding='utf-8')) if (HERE / 'playlists.json').exists() else {}
     if sc.get('template') in pls:
         try:
