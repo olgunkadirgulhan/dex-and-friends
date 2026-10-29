@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260924-173723",
-      "format": "short",
-      "template": "plot_twist",
-      "topic": "the night before an exam",
-      "title": "This 'Exam Leak' is not what it seems 💀",
-      "date": "2026-09-24 17:38"
-    },
-    {
       "id": "long_20260924-201642",
       "format": "long",
       "template": "dexs_terrible_ideas",
@@ -959,6 +951,14 @@
       "topic": "the office kitchen",
       "title": "Dex's Office Kitchen Sin Gets Him Evacuated 🐟",
       "date": "2026-10-29 18:15"
+    },
+    {
+      "id": "short_20261029-210824",
+      "format": "short",
+      "template": "caught",
+      "topic": "Running late for school",
+      "title": "Dex tries to skip school with a fake fever 😭",
+      "date": "2026-10-29 21:11"
     }
   ],
   "bank_used": [
