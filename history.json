@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "long_20260924-201642",
-      "format": "long",
-      "template": "dexs_terrible_ideas",
-      "topic": "school",
-      "title": "Dex Opens A Fake High School Diploma Store 🎓",
-      "date": "2026-09-24 20:20"
-    },
-    {
       "id": "short_20260925-010130",
       "format": "short",
       "template": "caught",
@@ -959,6 +951,14 @@
       "topic": "Running late for school",
       "title": "Dex tries to skip school with a fake fever 😭",
       "date": "2026-10-29 21:11"
+    },
+    {
+      "id": "short_20261030-141024",
+      "format": "short",
+      "template": "plot_twist",
+      "topic": "meeting the parents for the first time",
+      "title": "Dex Met Nia's Dad And It Was A Scam 🥩",
+      "date": "2026-10-30 14:38"
     }
   ],
   "bank_used": [
