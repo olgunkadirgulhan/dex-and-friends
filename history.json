@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260925-175433",
-      "format": "short",
-      "template": "types_of_people",
-      "topic": "paying rent",
-      "title": "When the rent is due but you’re broke 😭",
-      "date": "2026-09-25 17:58"
-    },
-    {
       "id": "short_20260925-212811",
       "format": "short",
       "template": "expectation_reality",
@@ -959,6 +951,14 @@
       "topic": "Types of people after high school",
       "title": "Dex learns that post-grad life is just a slipper-dodging marathon 😭",
       "date": "2026-10-30 18:11"
+    },
+    {
+      "id": "short_20261030-210813",
+      "format": "short",
+      "template": "caught",
+      "topic": "When mom is in a bad mood",
+      "title": "Mama Rose turned Dex into a human mop 😭",
+      "date": "2026-10-30 21:09"
     }
   ],
   "bank_used": [
