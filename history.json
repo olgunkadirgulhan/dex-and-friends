@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260926-130823",
-      "format": "short",
-      "template": "types_of_people",
-      "topic": "the wifi goes down",
-      "title": "Types of people when the WiFi suddenly dies 😭",
-      "date": "2026-09-26 13:12"
-    },
-    {
       "id": "short_20260926-160826",
       "format": "short",
       "template": "expectation_reality",
@@ -959,6 +951,14 @@
       "topic": "a work trip",
       "title": "Dex's Elite Business Trip Gets Exposed 😭",
       "date": "2026-10-31 14:10"
+    },
+    {
+      "id": "long_20261031-170815",
+      "format": "long",
+      "template": "dex_types_episode",
+      "topic": "the night before an exam",
+      "title": "Types of People the Night Before a Big Exam 😭",
+      "date": "2026-10-31 17:33"
     }
   ],
   "bank_used": [
