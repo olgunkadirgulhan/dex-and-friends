@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260926-220828",
-      "format": "short",
-      "template": "caught",
-      "topic": "sibling fight",
-      "title": "Dex's 'Invisible Brother' Lie Failed 💀",
-      "date": "2026-09-26 22:11"
-    },
-    {
       "id": "short_20260927-130841",
       "format": "short",
       "template": "plot_twist",
@@ -959,6 +951,14 @@
       "topic": "vacation",
       "title": "Dex and Pip Fight Over the Vacation Window Seat 😭",
       "date": "2026-11-01 14:20"
+    },
+    {
+      "id": "short_20261101-181014",
+      "format": "short",
+      "template": "rules_of",
+      "topic": "Different types of people taking showers",
+      "title": "The Unspoken Rules of Taking a Shower 🧼",
+      "date": "2026-11-01 18:21"
     }
   ],
   "bank_used": [
