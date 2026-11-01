@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260926-190806",
-      "format": "short",
-      "template": "types_of_people",
-      "topic": "a restaurant bill",
-      "title": "When the restaurant bill finally arrives 😭",
-      "date": "2026-09-26 19:10"
-    },
-    {
       "id": "short_20260926-220828",
       "format": "short",
       "template": "caught",
@@ -959,6 +951,14 @@
       "topic": "leftovers in the fridge",
       "title": "Dex Tried Saving His Leftovers for Midnight 😭",
       "date": "2026-10-31 21:16"
+    },
+    {
+      "id": "short_20261101-140911",
+      "format": "short",
+      "template": "sibling_war",
+      "topic": "vacation",
+      "title": "Dex and Pip Fight Over the Vacation Window Seat 😭",
+      "date": "2026-11-01 14:20"
     }
   ],
   "bank_used": [
