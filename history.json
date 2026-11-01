@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260927-130841",
-      "format": "short",
-      "template": "plot_twist",
-      "topic": "a birthday party",
-      "title": "He thought they threw him a surprise party... 💀",
-      "date": "2026-09-27 13:14"
-    },
-    {
       "id": "short_20260927-160803",
       "format": "short",
       "template": "expectation_reality",
@@ -959,6 +951,14 @@
       "topic": "Different types of people taking showers",
       "title": "The Unspoken Rules of Taking a Shower 🧼",
       "date": "2026-11-01 18:21"
+    },
+    {
+      "id": "short_20261101-210911",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "arguing with your sibling over nothing",
+      "title": "Types of Sibling Arguments Over Nothing 😭",
+      "date": "2026-11-01 21:15"
     }
   ],
   "bank_used": [
