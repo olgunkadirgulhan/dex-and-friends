@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260927-200806",
-      "format": "short",
-      "template": "mom_logic",
-      "topic": "holiday dinner",
-      "title": "She locked the Thanksgiving turkey in a safe 😭",
-      "date": "2026-09-27 20:11"
-    },
-    {
       "id": "short_20260927-220854",
       "format": "short",
       "template": "plot_twist",
@@ -959,6 +951,14 @@
       "topic": "passport photo day",
       "title": "Dex finds out Mama Rose's passport photo rule the hard way 😭",
       "date": "2026-11-02 14:09"
+    },
+    {
+      "id": "short_20261102-190828",
+      "format": "short",
+      "template": "caught",
+      "topic": "a new puppy",
+      "title": "Dex's new puppy is actually a dumpster diver 😭",
+      "date": "2026-11-02 19:11"
     }
   ],
   "bank_used": [
