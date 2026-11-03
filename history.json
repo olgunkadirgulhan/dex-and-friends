@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260928-200605",
-      "format": "short",
-      "template": "mom_logic",
-      "topic": "going to the doctor",
-      "title": "Mama Rose’s Medical Logic is Terrifying 💀",
-      "date": "2026-09-28 20:11"
-    },
-    {
       "id": "short_20260928-220827",
       "format": "short",
       "template": "types_of_people",
@@ -959,6 +951,14 @@
       "topic": "a video game",
       "title": "Dex learns the true rules of modern video games 🎮",
       "date": "2026-11-03 18:14"
+    },
+    {
+      "id": "short_20261103-210818",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "chores day",
+      "title": "How everyone handles chore day in this house 😭",
+      "date": "2026-11-03 21:11"
     }
   ],
   "bank_used": [
