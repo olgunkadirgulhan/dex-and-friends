@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260928-160817",
-      "format": "short",
-      "template": "expectation_reality",
-      "topic": "the gym",
-      "title": "Abs by Friday? The pink weight had other plans 💀",
-      "date": "2026-09-28 16:18"
-    },
-    {
       "id": "short_20260928-200605",
       "format": "short",
       "template": "mom_logic",
@@ -959,6 +951,14 @@
       "topic": "Types of people on Christmas morning",
       "title": "Dex finds out why Mama Rose is rushing Christmas 😭",
       "date": "2026-11-03 14:16"
+    },
+    {
+      "id": "short_20261103-180838",
+      "format": "short",
+      "template": "rules_of",
+      "topic": "a video game",
+      "title": "Dex learns the true rules of modern video games 🎮",
+      "date": "2026-11-03 18:14"
     }
   ],
   "bank_used": [
