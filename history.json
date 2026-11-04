@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260929-160812",
-      "format": "short",
-      "template": "mom_logic",
-      "topic": "a haircut",
-      "title": "Mama Rose cuts hair at home 💀",
-      "date": "2026-09-29 16:11"
-    },
-    {
       "id": "long_20260929-170826",
       "format": "long",
       "template": "big_tonys_business_lessons",
@@ -959,6 +951,14 @@
       "topic": "finding out your crush likes you",
       "title": "Dex got caught faking his own secret admirer letter 😭",
       "date": "2026-11-04 18:15"
+    },
+    {
+      "id": "short_20261104-211210",
+      "format": "short",
+      "template": "plot_twist",
+      "topic": "the wifi goes down",
+      "title": "Dex and Big Tony realize who owned the Wi-Fi 😭",
+      "date": "2026-11-04 21:17"
     }
   ],
   "bank_used": [
