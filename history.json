@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260929-130828",
-      "format": "short",
-      "template": "plot_twist",
-      "topic": "paying rent",
-      "title": "When you try to pay rent in bubblegum 💀",
-      "date": "2026-09-29 13:12"
-    },
-    {
       "id": "short_20260929-160812",
       "format": "short",
       "template": "mom_logic",
@@ -959,6 +951,14 @@
       "topic": "Everyday relatable moments with siblings",
       "title": "Dex changed the WiFi password to sell subscriptions 😭",
       "date": "2026-11-04 14:16"
+    },
+    {
+      "id": "short_20261104-181102",
+      "format": "short",
+      "template": "caught",
+      "topic": "finding out your crush likes you",
+      "title": "Dex got caught faking his own secret admirer letter 😭",
+      "date": "2026-11-04 18:15"
     }
   ],
   "bank_used": [
