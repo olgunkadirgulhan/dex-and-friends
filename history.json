@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "long_20260929-170826",
-      "format": "long",
-      "template": "big_tonys_business_lessons",
-      "topic": "diet",
-      "title": "Big Tony's All-Bubblegum Diet Went HORRIBLY Wrong 💀",
-      "date": "2026-09-29 17:13"
-    },
-    {
       "id": "short_20260929-200805",
       "format": "short",
       "template": "plot_twist",
@@ -959,6 +951,14 @@
       "topic": "the wifi goes down",
       "title": "Dex and Big Tony realize who owned the Wi-Fi 😭",
       "date": "2026-11-04 21:17"
+    },
+    {
+      "id": "short_20261105-140854",
+      "format": "short",
+      "template": "caught",
+      "topic": "group projects",
+      "title": "Dex Got Caught Delegating His Group Project 😭",
+      "date": "2026-11-05 14:20"
     }
   ],
   "bank_used": [
