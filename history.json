@@ -1,22 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260929-200805",
-      "format": "short",
-      "template": "plot_twist",
-      "topic": "babysitting Pip",
-      "title": "He sold his house for WHAT?! 💀",
-      "date": "2026-09-29 20:10"
-    },
-    {
-      "id": "short_20260929-220832",
-      "format": "short",
-      "template": "caught",
-      "topic": "grocery shopping",
-      "title": "When you try to pay for groceries with vibes 😭",
-      "date": "2026-09-29 22:10"
-    },
-    {
       "id": "short_20260930-130839",
       "format": "short",
       "template": "mom_logic",
@@ -967,6 +951,14 @@
       "topic": null,
       "title": "Dex tries Big Tony's 'automated' mower and exploits Pip 😭",
       "date": "2026-11-02 18:35"
+    },
+    {
+      "id": "short_20261105-180909",
+      "format": "short",
+      "template": "caught",
+      "topic": "the last slice of pizza",
+      "title": "Dex gets banned from the kitchen forever 😭",
+      "date": "2026-11-05 18:15"
     }
   ],
   "bank_used": [
