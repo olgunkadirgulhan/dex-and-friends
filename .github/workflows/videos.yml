@@ -112,8 +112,7 @@ jobs:
           for p in history.json published.csv queue viewer_requests.json; do [ -e "$p" ] && git add "$p" || true; done
           git diff --cached --quiet && exit 0
           git commit -m "video: $(date -u +%F-%H%M)"
-          git pull --rebase
-          git push
+          for i in 1 2 3 4 5 6 7 8; do git pull --rebase -q && git push -q && break; echo "push denemesi $i başarısız, tekrar"; sleep $((i*15)); done   # 2026-11-05: GitHub aralıklı 500 (commit_refs) → kayıt kaybolmasın
       - name: İlk yorum (hemen)
         if: always()
         env:
