@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20260930-160917",
-      "format": "short",
-      "template": "caught",
-      "topic": "a restaurant bill",
-      "title": "He tried to pay the bill with WHAT?! 💀",
-      "date": "2026-09-30 16:12"
-    },
-    {
       "id": "short_20260930-200929",
       "format": "short",
       "template": "types_of_people",
@@ -959,6 +951,14 @@
       "topic": "Types of people at the gym",
       "title": "Mama Rose found out how much Dex spends at the gym 😭",
       "date": "2026-11-05 20:42"
+    },
+    {
+      "id": "short_20261106-140811",
+      "format": "short",
+      "template": "caught",
+      "topic": "the TV remote",
+      "title": "Dex's secret remote hiding spot backfires completely 😭",
+      "date": "2026-11-06 14:36"
     }
   ],
   "bank_used": [
