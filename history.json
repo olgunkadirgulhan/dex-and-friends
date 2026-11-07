@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261001-130809",
-      "format": "short",
-      "template": "mom_logic",
-      "topic": "a birthday party",
-      "title": "Mama Rose's birthday rules are getting out of hand 💀",
-      "date": "2026-10-01 13:12"
-    },
-    {
       "id": "short_20261001-161631",
       "format": "short",
       "template": "types_of_people",
@@ -959,6 +951,14 @@
       "topic": "a garage sale",
       "title": "Dex Spent Fifty Bucks At Pip's Secret Garage Sale 😭",
       "date": "2026-11-06 21:10"
+    },
+    {
+      "id": "short_20261107-140808",
+      "format": "short",
+      "template": "sibling_war",
+      "topic": "online shopping",
+      "title": "Pip caught Dex abusing online shipping deals 😭",
+      "date": "2026-11-07 14:13"
     }
   ],
   "bank_used": [
