@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261002-160828",
-      "format": "short",
-      "template": "expectation_reality",
-      "topic": "a job interview",
-      "title": "He tried to be the boss but became a dog toy 😭",
-      "date": "2026-10-02 16:14"
-    },
-    {
       "id": "short_20261002-200817",
       "format": "short",
       "template": "plot_twist",
@@ -959,6 +951,14 @@
       "topic": "the dentist",
       "title": "Mama Rose's Unbelievable Dentist Rule 😭",
       "date": "2026-11-08 18:11"
+    },
+    {
+      "id": "short_20261108-210801",
+      "format": "short",
+      "template": "caught",
+      "topic": "a broken vase",
+      "title": "Dex Tried Blaming The Weather For Mom's Broken Vase 😭",
+      "date": "2026-11-08 21:16"
     }
   ],
   "bank_used": [
