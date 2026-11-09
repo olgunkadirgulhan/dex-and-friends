@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261002-220811",
-      "format": "short",
-      "template": "expectation_reality",
-      "topic": "babysitting Pip",
-      "title": "He thought babysitting would be EASY money 😭",
-      "date": "2026-10-02 22:18"
-    },
-    {
       "id": "short_20261003-130805",
       "format": "short",
       "template": "caught",
@@ -959,6 +951,14 @@
       "topic": "college",
       "title": "Dex finds out why Mom's new house rules have a syllabus 😭",
       "date": "2026-11-09 14:36"
+    },
+    {
+      "id": "short_20261109-180907",
+      "format": "short",
+      "template": "plot_twist",
+      "topic": "Types of people at a sleepover",
+      "title": "Dex turned his sleepover into a premium networking event 😭",
+      "date": "2026-11-09 18:21"
     }
   ],
   "bank_used": [
