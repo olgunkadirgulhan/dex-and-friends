@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261002-200817",
-      "format": "short",
-      "template": "plot_twist",
-      "topic": "phone addiction",
-      "title": "He took phone addiction to a whole new level 💀",
-      "date": "2026-10-02 20:15"
-    },
-    {
       "id": "short_20261002-220811",
       "format": "short",
       "template": "expectation_reality",
@@ -959,6 +951,14 @@
       "topic": "a broken vase",
       "title": "Dex Tried Blaming The Weather For Mom's Broken Vase 😭",
       "date": "2026-11-08 21:16"
+    },
+    {
+      "id": "short_20261109-140820",
+      "format": "short",
+      "template": "mom_logic",
+      "topic": "college",
+      "title": "Dex finds out why Mom's new house rules have a syllabus 😭",
+      "date": "2026-11-09 14:36"
     }
   ],
   "bank_used": [
