@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261003-200810",
-      "format": "short",
-      "template": "types_of_people",
-      "topic": "going to the doctor",
-      "title": "The absolute worst people to take to the doctor 😭",
-      "date": "2026-10-03 20:10"
-    },
-    {
       "id": "short_20261003-220814",
       "format": "short",
       "template": "plot_twist",
@@ -959,6 +951,14 @@
       "topic": "When your mom is in a bad mood",
       "title": "Dex tried logic when Mom was in a bad mood 😭",
       "date": "2026-11-10 18:14"
+    },
+    {
+      "id": "short_20261110-210828",
+      "format": "short",
+      "template": "expectation_reality",
+      "topic": "Running late for school",
+      "title": "Dex tried a school morning speedrun routine 😭",
+      "date": "2026-11-10 21:11"
     }
   ],
   "bank_used": [
