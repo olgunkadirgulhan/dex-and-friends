@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "long_20261003-170817",
-      "format": "long",
-      "template": "growing_up_with_mama_rose",
-      "topic": "moving to a new house",
-      "title": "Moving next door is a whole nightmare 😭",
-      "date": "2026-10-03 17:14"
-    },
-    {
       "id": "short_20261003-200810",
       "format": "short",
       "template": "types_of_people",
@@ -959,6 +951,14 @@
       "topic": "a family road trip",
       "title": "Mama Rose's Road Trip Rules Are Insane 😭",
       "date": "2026-11-10 14:15"
+    },
+    {
+      "id": "short_20261110-180859",
+      "format": "short",
+      "template": "caught",
+      "topic": "When your mom is in a bad mood",
+      "title": "Dex tried logic when Mom was in a bad mood 😭",
+      "date": "2026-11-10 18:14"
     }
   ],
   "bank_used": [
