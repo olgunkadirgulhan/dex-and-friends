@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261005-230825",
-      "format": "short",
-      "template": "rules_of",
-      "topic": "the TV remote",
-      "title": "The unspoken rules of the TV remote 😭",
-      "date": "2026-10-05 23:11"
-    },
-    {
       "id": "short_20261006-130826",
       "format": "short",
       "template": "sibling_war",
@@ -959,6 +951,14 @@
       "topic": "Acting normal when you see your crush",
       "title": "Dex tried looking cool for his crush and failed 😭",
       "date": "2026-11-12 14:31"
+    },
+    {
+      "id": "short_20261112-180809",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "a power outage",
+      "title": "Types of people during a blackout 😭",
+      "date": "2026-11-12 18:25"
     }
   ],
   "bank_used": [
