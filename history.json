@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261006-220811",
-      "format": "short",
-      "template": "caught",
-      "topic": "the food truck",
-      "title": "His gourmet food truck business went HORRIBLY wrong 😭",
-      "date": "2026-10-06 22:14"
-    },
-    {
       "id": "short_20261007-130816",
       "format": "short",
       "template": "types_of_people",
@@ -959,6 +951,14 @@
       "topic": "When your mom helps with homework",
       "title": "Dex learns that Mom's math always ends in a slipper 😭",
       "date": "2026-11-13 14:15"
+    },
+    {
+      "id": "short_20261113-181230",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "When your secret accent slips out",
+      "title": "Types of fake accents slipping out 😭",
+      "date": "2026-11-13 18:24"
     }
   ],
   "bank_used": [
