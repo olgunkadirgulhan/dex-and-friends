@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261007-222644",
-      "format": "short",
-      "template": "rules_of",
-      "topic": "a work trip",
-      "title": "The unspoken rules of a corporate work trip 😭",
-      "date": "2026-10-07 22:38"
-    },
-    {
       "id": "short_20261008-130805",
       "format": "short",
       "template": "pov",
@@ -959,6 +951,14 @@
       "topic": "the first day at a new job",
       "title": "Dex ruined his first day at a new job 😭",
       "date": "2026-11-14 14:25"
+    },
+    {
+      "id": "long_20261114-170815",
+      "format": "long",
+      "template": "dex_types_episode",
+      "topic": "a birthday party",
+      "title": "Types of People at a Birthday Party 😭",
+      "date": "2026-11-14 17:23"
     }
   ],
   "bank_used": [
