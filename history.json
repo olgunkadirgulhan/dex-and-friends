@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261009-172711",
-      "format": "short",
-      "template": "rules_of",
-      "topic": "grocery shopping",
-      "title": "Unspoken rules of grocery shopping 😭",
-      "date": "2026-10-09 17:34"
-    },
-    {
       "id": "short_20261009-220822",
       "format": "short",
       "template": "caught",
@@ -959,6 +951,14 @@
       "topic": "Types of people at the gym",
       "title": "Dex Breaks Every Unspoken Gym Rule 😭",
       "date": "2026-11-15 18:32"
+    },
+    {
+      "id": "short_20261115-210817",
+      "format": "short",
+      "template": "caught",
+      "topic": "a performance review",
+      "title": "Dex's Fake Job Performance Review Backfires 😭",
+      "date": "2026-11-15 21:11"
     }
   ],
   "bank_used": [
