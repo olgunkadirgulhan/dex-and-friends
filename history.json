@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261010-130819",
-      "format": "short",
-      "template": "expectation_reality",
-      "topic": "a karaoke night",
-      "title": "He really thought he was a rockstar 🎤",
-      "date": "2026-10-10 13:14"
-    },
-    {
       "id": "long_20261010-170823",
       "format": "long",
       "template": "big_tonys_business_lessons",
@@ -959,6 +951,14 @@
       "topic": "traffic",
       "title": "Unspoken rules of traffic that Dex strictly follows 🚗",
       "date": "2026-11-16 14:34"
+    },
+    {
+      "id": "short_20261116-180820",
+      "format": "short",
+      "template": "caught",
+      "topic": "grocery shopping",
+      "title": "Dex spent Mom's grocery money on a laser tag pass 😭",
+      "date": "2026-11-16 18:31"
     }
   ],
   "bank_used": [
