@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261009-220822",
-      "format": "short",
-      "template": "caught",
-      "topic": "the self checkout",
-      "title": "He tried to outsmart the self checkout 💀",
-      "date": "2026-10-09 22:10"
-    },
-    {
       "id": "short_20261010-130819",
       "format": "short",
       "template": "expectation_reality",
@@ -959,6 +951,14 @@
       "topic": "a performance review",
       "title": "Dex's Fake Job Performance Review Backfires 😭",
       "date": "2026-11-15 21:11"
+    },
+    {
+      "id": "short_20261116-140822",
+      "format": "short",
+      "template": "rules_of",
+      "topic": "traffic",
+      "title": "Unspoken rules of traffic that Dex strictly follows 🚗",
+      "date": "2026-11-16 14:34"
     }
   ],
   "bank_used": [
