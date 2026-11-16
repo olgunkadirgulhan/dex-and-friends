@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "long_20261010-170823",
-      "format": "long",
-      "template": "big_tonys_business_lessons",
-      "topic": "the wifi goes down",
-      "title": "He tried to sell offline WiFi during a blackout 💀",
-      "date": "2026-10-10 17:17"
-    },
-    {
       "id": "short_20261010-180808",
       "format": "short",
       "template": "normal_vs_psycho",
@@ -959,6 +951,14 @@
       "topic": "grocery shopping",
       "title": "Dex spent Mom's grocery money on a laser tag pass 😭",
       "date": "2026-11-16 18:31"
+    },
+    {
+      "id": "short_20261116-210807",
+      "format": "short",
+      "template": "mom_logic",
+      "topic": "a trivia night",
+      "title": "Dex Learns Why Mom Always Wins Trivia Night 😭",
+      "date": "2026-11-16 21:19"
     }
   ],
   "bank_used": [
