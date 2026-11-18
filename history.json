@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261012-131511",
-      "format": "short",
-      "template": "pov",
-      "topic": "Types of people at the gym",
-      "title": "Coach Barry takes personal training way too far 😭",
-      "date": "2026-10-12 13:38"
-    },
-    {
       "id": "short_20261012-170830",
       "format": "short",
       "template": "plot_twist",
@@ -959,6 +951,14 @@
       "topic": "When your mom stands on business",
       "title": "Mama Rose charges Dex a Wi-Fi subscription fee 😭",
       "date": "2026-11-18 18:32"
+    },
+    {
+      "id": "short_20261118-211304",
+      "format": "short",
+      "template": "expectation_reality",
+      "topic": "types of people during zombie apocalypses",
+      "title": "Dex thinks he is the main character in a zombie movie 😭",
+      "date": "2026-11-18 21:26"
     }
   ],
   "bank_used": [
