@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261011-220805",
-      "format": "short",
-      "template": "mom_logic",
-      "topic": "a restaurant bill",
-      "title": "Mom logic when the restaurant bill arrives 😭",
-      "date": "2026-10-11 22:12"
-    },
-    {
       "id": "short_20261012-131511",
       "format": "short",
       "template": "pov",
@@ -959,6 +951,14 @@
       "topic": "sharing a bedroom",
       "title": "Dex's little brother turned their bedroom into a border crossing 😭",
       "date": "2026-11-18 14:27"
+    },
+    {
+      "id": "short_20261118-182945",
+      "format": "short",
+      "template": "plot_twist",
+      "topic": "When your mom stands on business",
+      "title": "Mama Rose charges Dex a Wi-Fi subscription fee 😭",
+      "date": "2026-11-18 18:32"
     }
   ],
   "bank_used": [
