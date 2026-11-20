@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261014-140812",
-      "format": "short",
-      "template": "caught",
-      "topic": "a new puppy",
-      "title": "Dex tries to hide a brand new puppy from Mom 😭",
-      "date": "2026-10-14 14:13"
-    },
-    {
       "id": "short_20261014-175726",
       "format": "short",
       "template": "expectation_reality",
@@ -959,6 +951,14 @@
       "topic": "a camping trip",
       "title": "Dex and Pip's backyard camping trip turned into total chaos 😭",
       "date": "2026-11-20 18:53"
+    },
+    {
+      "id": "short_20261120-210119",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "a job interview",
+      "title": "Types of people at a job interview 😭",
+      "date": "2026-11-20 21:11"
     }
   ],
   "bank_used": [
