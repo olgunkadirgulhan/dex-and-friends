@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261015-140815",
-      "format": "short",
-      "template": "caught",
-      "topic": "chores day",
-      "title": "Dex tried to outsmart chores day 😭",
-      "date": "2026-10-15 14:12"
-    },
-    {
       "id": "short_20261015-174351",
       "format": "short",
       "template": "rules_of",
@@ -959,6 +951,14 @@
       "topic": "a haircut",
       "title": "Dex Gets a $0 DIY Haircut Before Dinner",
       "date": "2026-11-21 17:36"
+    },
+    {
+      "id": "short_20261121-191018",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "Types of people at a sleepover",
+      "title": "Big Tony turned my sleepover into a hotel business 😭",
+      "date": "2026-11-21 19:14"
     }
   ],
   "bank_used": [
