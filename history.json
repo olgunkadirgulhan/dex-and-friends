@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261015-174351",
-      "format": "short",
-      "template": "rules_of",
-      "topic": "the neighbor's Halloween decorations",
-      "title": "Big Tony reviews the neighbor's spooky Halloween decorations 💀",
-      "date": "2026-10-15 18:00"
-    },
-    {
       "id": "short_20261015-210931",
       "format": "short",
       "template": "types_of_people",
@@ -959,6 +951,14 @@
       "topic": "Types of people at a sleepover",
       "title": "Big Tony turned my sleepover into a hotel business 😭",
       "date": "2026-11-21 19:14"
+    },
+    {
+      "id": "short_20261121-210824",
+      "format": "short",
+      "template": "expectation_reality",
+      "topic": "the wifi goes down",
+      "title": "Dex Tries To Survive Five Minutes Without Wi-Fi 😭",
+      "date": "2026-11-21 21:18"
     }
   ],
   "bank_used": [
