@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261014-210809",
-      "format": "short",
-      "template": "rules_of",
-      "topic": "first job",
-      "title": "Dex broke every unspoken rule at his first job 😭",
-      "date": "2026-10-14 21:12"
-    },
-    {
       "id": "short_20261015-140815",
       "format": "short",
       "template": "caught",
@@ -959,6 +951,14 @@
       "topic": "college",
       "title": "Mama Rose Charges Dex Tuition for Living at Home 😭",
       "date": "2026-11-21 14:31"
+    },
+    {
+      "id": "long_20261121-170807",
+      "format": "long",
+      "template": "dex_types_episode",
+      "topic": "a haircut",
+      "title": "Dex Gets a $0 DIY Haircut Before Dinner",
+      "date": "2026-11-21 17:36"
     }
   ],
   "bank_used": [
