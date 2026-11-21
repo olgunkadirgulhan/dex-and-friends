@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261014-175726",
-      "format": "short",
-      "template": "expectation_reality",
-      "topic": "a trivia night",
-      "title": "Dex thought he was a trivia genius 😭",
-      "date": "2026-10-14 18:02"
-    },
-    {
       "id": "short_20261014-210809",
       "format": "short",
       "template": "rules_of",
@@ -959,6 +951,14 @@
       "topic": "a job interview",
       "title": "Types of people at a job interview 😭",
       "date": "2026-11-20 21:11"
+    },
+    {
+      "id": "short_20261121-140836",
+      "format": "short",
+      "template": "mom_logic",
+      "topic": "college",
+      "title": "Mama Rose Charges Dex Tuition for Living at Home 😭",
+      "date": "2026-11-21 14:31"
     }
   ],
   "bank_used": [
