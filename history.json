@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261016-140810",
-      "format": "short",
-      "template": "sibling_war",
-      "topic": "college",
-      "title": "Pip stole Dex's college textbook to build a fort 😭",
-      "date": "2026-10-16 14:12"
-    },
-    {
       "id": "short_20261016-180925",
       "format": "short",
       "template": "expectation_reality",
@@ -959,6 +951,14 @@
       "topic": "a power outage",
       "title": "Big Tony's secret power supply blew our breaker 😭",
       "date": "2026-11-22 14:26"
+    },
+    {
+      "id": "short_20261122-180908",
+      "format": "short",
+      "template": "mom_logic",
+      "topic": "running late for school",
+      "title": "Mom caught Dex speeding to the school bus 😭",
+      "date": "2026-11-22 18:15"
     }
   ],
   "bank_used": [
