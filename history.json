@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261017-210852",
-      "format": "short",
-      "template": "expectation_reality",
-      "topic": "Types of people at Thanksgiving dinner",
-      "title": "Expectation vs Reality: Thanksgiving dinner with Mama Rose 🦃",
-      "date": "2026-10-17 21:14"
-    },
-    {
       "id": "short_20261018-140818",
       "format": "short",
       "template": "caught",
@@ -959,6 +951,14 @@
       "topic": "learning to drive",
       "title": "Mom's absurd driving logic almost gets Dex wrecked 😭",
       "date": "2026-11-24 14:11"
+    },
+    {
+      "id": "short_20261124-180819",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "when your mom is in a bad mood",
+      "title": "Types of people when Mom is in a bad mood 😭",
+      "date": "2026-11-24 18:15"
     }
   ],
   "bank_used": [
