@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261018-210813",
-      "format": "short",
-      "template": "types_of_people",
-      "topic": "carving a pumpkin",
-      "title": "Types of people carving Halloween pumpkins 🎃",
-      "date": "2026-10-18 21:11"
-    },
-    {
       "id": "short_20261019-140836",
       "format": "short",
       "template": "plot_twist",
@@ -959,6 +951,14 @@
       "topic": "the first day at a new job",
       "title": "Dex got fired from his new job in ten minutes 😭",
       "date": "2026-11-25 14:11"
+    },
+    {
+      "id": "short_20261125-180904",
+      "format": "short",
+      "template": "types_of_people",
+      "topic": "a long flight",
+      "title": "Types of people on a long flight ✈️",
+      "date": "2026-11-25 18:23"
     }
   ],
   "bank_used": [
