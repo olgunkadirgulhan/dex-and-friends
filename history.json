@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261018-180811",
-      "format": "short",
-      "template": "plot_twist",
-      "topic": "eating your sibling's leftover food",
-      "title": "Dex stole the WRONG leftover wings from Mom 😭",
-      "date": "2026-10-18 18:11"
-    },
-    {
       "id": "short_20261018-210813",
       "format": "short",
       "template": "types_of_people",
@@ -959,6 +951,14 @@
       "topic": "different types of students at school",
       "title": "Dex tried downloading calculus directly into his brain 😭",
       "date": "2026-11-24 21:19"
+    },
+    {
+      "id": "short_20261125-140828",
+      "format": "short",
+      "template": "caught",
+      "topic": "the first day at a new job",
+      "title": "Dex got fired from his new job in ten minutes 😭",
+      "date": "2026-11-25 14:11"
     }
   ],
   "bank_used": [
