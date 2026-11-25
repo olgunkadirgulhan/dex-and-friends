@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261019-140836",
-      "format": "short",
-      "template": "plot_twist",
-      "topic": "trick-or-treating",
-      "title": "Dex tries to trick-or-treat at 25 years old 😭",
-      "date": "2026-10-19 14:09"
-    },
-    {
       "id": "short_20261019-180816",
       "format": "short",
       "template": "caught",
@@ -959,6 +951,14 @@
       "topic": "a long flight",
       "title": "Types of people on a long flight ✈️",
       "date": "2026-11-25 18:23"
+    },
+    {
+      "id": "short_20261125-211216",
+      "format": "short",
+      "template": "rules_of",
+      "topic": "Types of people at the gym",
+      "title": "Unspoken Gym Rules Dex Takes Way Too Seriously 😭",
+      "date": "2026-11-25 21:28"
     }
   ],
   "bank_used": [
