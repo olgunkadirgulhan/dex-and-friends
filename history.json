@@ -1,14 +1,6 @@
 {
   "recent": [
     {
-      "id": "short_20261019-210818",
-      "format": "short",
-      "template": "sibling_war",
-      "topic": "Halloween costume party",
-      "title": "Dex and Pip ruined Mom's expensive duvet for Halloween 😭",
-      "date": "2026-10-19 21:14"
-    },
-    {
       "id": "short_20261020-140818",
       "format": "short",
       "template": "caught",
@@ -959,6 +951,14 @@
       "topic": "When your mom finds your report card",
       "title": "Dex thinks his failing grades are a personal brand 😭",
       "date": "2026-11-26 14:22"
+    },
+    {
+      "id": "short_20261126-180833",
+      "format": "short",
+      "template": "mom_logic",
+      "topic": "the food truck",
+      "title": "Mama Rose shuts down Dex's illegal food truck 😭",
+      "date": "2026-11-26 18:14"
     }
   ],
   "bank_used": [
